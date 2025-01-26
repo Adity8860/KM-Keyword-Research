@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/app/', // Ensure trailing slash
+  base: '/', // Ensure trailing slash
   plugins: [
     react(),
     tailwindcss(),
