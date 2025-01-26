@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    padding: 0;
+    
+    font-family: 'Poppins', sans-serif;
+ }
+
+.wave-border {
+    position: relative;
+}
+
+.wave-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -20px;
+    width: 20px;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 100"><path d="M10 0 Q 15 50 10 100 Q 5 50 10 0 Z" fill="white"/></svg>') repeat-y;
+}
+
+.curve-border {
+    position: relative;
+    border-left: 20px solid transparent;
+    border-top-left-radius: 50% 100%;
+    border-bottom-left-radius: 50% 100%;
+    overflow: hidden;
+}
