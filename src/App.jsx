@@ -56,7 +56,7 @@ const AppContent = () => {
 function App() {
   return (
     <>
-      <Router basename='/app'>
+      <Router basename='/app/'> {/* Ensure trailing slash */}
         <AppContent />
       </Router>
     </>
