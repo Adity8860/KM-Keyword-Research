@@ -13,7 +13,7 @@ import LandingPage from "./Components/LangingPage/landingPage.jsx";
 import LoginPage from "./Components/Login&Registation/loginForm.jsx";
 import RegistrationPage from "./Components/Login&Registation/registation.jsx";
 
-const BASE_URL = "https://km-keyword-research.vercel.app/"
+// const BASE_URL = "https://km-keyword-research.vercel.app/"
 
 // const PrivateRoute = () => (
 //   <div className='flex flex-grow-1'>
@@ -56,7 +56,7 @@ const AppContent = () => {
 function App() {
   return (
     <>
-      <Router basename={BASE_URL || '/'}>
+      <Router basename='/app'>
         <AppContent />
       </Router>
     </>
