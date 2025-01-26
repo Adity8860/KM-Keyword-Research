@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import Navbar from "./Components/Navbar/navbar.jsx";
-import Sidepanel from "./Components/Sidepanel/sidePanel.jsx";
+import Sidepanel from "./Components/Sidepanel/sidepanel.jsx"; // Updated import statement
 import KeywordData from "./Components/ShowData/keywordData.jsx";
 import LoginPage from "./Components/Login&Registation/loginForm.jsx";
 import RegistrationPage from "./Components/Login&Registation/registation.jsx";

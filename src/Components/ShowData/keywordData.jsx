@@ -132,16 +132,16 @@ const keywordData = () => {
             </div>
           )}
         </div>
-        <div className="w-full h-full max-w-[65rem] mx-auto p-1 mt-2 rounded-lg flex items-center">  
+        <div className="w-full h-full max-w-[65rem] mx-auto p-1 mt-4 rounded-lg flex items-center">  
           <div
-            className={`w-full h-full text-center p-3 rounded-lg shadow-lg transition-all duration-300 ${
-              hover ? "bg-blue-500 text-white" : "bg-white text-gray-800"
+            className={`w-full h-full text-center p-3 border-2 rounded-lg shadow-lg transition-all duration-300 ${
+              hover ? "bg-gradient-to-r mt-4 shadow-md from-blue-500 to-purple-300  text-white" : "bg-white text-gray-600 "
             }`}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
-            style={{ height: "100px", width: "100%" }} // Set fixed height and width
+            style={{ height: "100px", width: "100%" }}
           >
-            <h2 className="text-md font-light mb-2 p-4 sm:text-lg md:text-xl">
+            <h2 className="text-lg font-extrabold mb-2 p-4 sm:text-md md:text-md">
               {hover
                 ? "Keyword research is finding out what words people search for online, so businesses can use them to create content, get noticed, and attract the right audience"
                 : "Try our Keyword Research tool right now!"}
