@@ -4,14 +4,16 @@ import {
   Routes,
   Route,
   useLocation,
- 
 } from "react-router-dom";
 
 import Navbar from "./Components/Navbar/navbar.jsx";
 import Sidepanel from "./Components/SidePanel/sidePanel.jsx"; // Updated import statement
 import KeywordData from "./Components/ShowData/keywordData.jsx";
+import LandingPage from "./Components/LangingPage/landingPage.jsx";
 import LoginPage from "./Components/Login&Registation/loginForm.jsx";
 import RegistrationPage from "./Components/Login&Registation/registation.jsx";
+
+const BASE_URL = "https://km-keyword-research.vercel.app/"
 
 // const PrivateRoute = () => (
 //   <div className='flex flex-grow-1'>
@@ -28,7 +30,7 @@ import RegistrationPage from "./Components/Login&Registation/registation.jsx";
 
 const AppContent = () => {
   const location = useLocation();
-  const showSidepanel = !["/login", "/register"].includes(location.pathname);
+  const showSidepanel = !["/","/login", "/register"].includes(location.pathname);
   const showNavbar = !["/login", "/register"].includes(location.pathname);
 
   console.log("Current location:", location.pathname);
@@ -42,7 +44,8 @@ const AppContent = () => {
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegistrationPage />} />
-            <Route path="/" element={<KeywordData />} />
+            <Route path="/keyword" element={<KeywordData />} />
+            <Route path="/" element={<LandingPage />} />
           </Routes>
         </div>
       </div>
@@ -53,7 +56,7 @@ const AppContent = () => {
 function App() {
   return (
     <>
-      <Router>
+      <Router basename={BASE_URL || '/'}>
         <AppContent />
       </Router>
     </>
