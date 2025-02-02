@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LoginPage from "../Login&Registation/loginForm";
 
 const Navbar = () => {
@@ -16,6 +16,10 @@ const Navbar = () => {
   const hideLogin = () => {
     setIsLoginVisible(false);
   };
+
+  useEffect(() => {
+    console.log("isLoginVisible:", isLoginVisible);
+  }, [isLoginVisible]);
 
   return (
     <>
@@ -83,7 +87,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <LoginPage isVisible={isLoginVisible} onClose={hideLogin} />
+      {isLoginVisible && <LoginPage isVisible={isLoginVisible} onClose={hideLogin} />}
     </>
   );
 };

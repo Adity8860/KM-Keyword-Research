@@ -142,7 +142,7 @@ const KeywordData = () => {
         <div className="w-full relative h-30 mt-4" id="hover">
           <div className="absolute rounded-lg h-full inset-0 flex items-center justify-center border-1 border-gray-500 text-white text-lg transition-opacity duration-300 ease-in-out z-10 opacity-100 hover:opacity-0 p-4 sm:p-10">
             <div className="items-center">
-              <p className="text-black text-md sm:text-lg p-2 sm:p-4">
+              <p className="text-black text-md sm:text-lg p-2 sm:p-4 lg:text-xl">
                 Want to grow your business, your social media with the right
                 advertising and marketing and much more with Keyword Raja?
               </p>
@@ -150,7 +150,7 @@ const KeywordData = () => {
           </div>
           <div className="absolute rounded-lg inset-0 flex items-center justify-center bg-orange-500 text-white text-lg transition-opacity duration-500 ease-in-out z-20 opacity-0 hover:opacity-100 p-3 sm:p-10">
             <div className="flex flex-col items-center">
-              <h1 className="text-md sm:text-lg  text-bold">
+              <h1 className="text-md sm:text-lg text-bold lg:text-2xl">
                 Make your account for free
               </h1>
               <button className="bg-white mt-2 text-gray-600 p-2 w-[8rem] sm:w-[12rem] rounded-xl text-center cursor-pointer">

@@ -3,15 +3,13 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useLocation,
+ 
 } from "react-router-dom";
 
-import Navbar from "./Components/Navbar/navbar.jsx";
-import Sidepanel from "./Components/SidePanel/sidePanel.jsx";
 import KeywordData from "./Components/ShowData/keywordData.jsx";
 import LandingPage from "./Components/LangingPage/landingPage.jsx";
 import LoginPage from "./Components/Login&Registation/loginForm.jsx";
-import SignupPage from "./Components/Login&Registation/registation.jsx";
+import SignupPage from "./Components/Login&Registation/signupForm.jsx";
 import Layout from "./Components/Layout.jsx";
 
 // Remove the duplicate Layout definition
@@ -34,8 +32,7 @@ import Layout from "./Components/Layout.jsx";
 const AppContent = () => {
   return (
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignupPage />} /> 
+     
       <Route path="/" element={<LandingPage />} />
       <Route
         path="*"
