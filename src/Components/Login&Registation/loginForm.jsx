@@ -1,112 +1,116 @@
-import React from "react";
-import { Link } from "react-router-dom"; // Correct import statement
-import './registation.css';
+import React, { useEffect, useRef, useState } from "react";
 
-const LoginPage = () => {
+function LoginPage({ isVisible, onClose }) {
+  const modalRef = useRef(null);
+  const [transform, setTransform] = useState("scale(0)");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (isVisible) {
+      setTransform("scale(0)");
+      setTimeout(() => {
+        setTransform("scale(1)");
+      }, 0);
+    } else {
+      setTransform("scale(1)");
+      setTimeout(() => {
+        setTransform("scale(0)");
+      }, 0);
+    }
+  }, [isVisible]);
+
+  const handleClose = () => {
+    setTransform("scale(1)");
+    setTimeout(() => {
+      setTransform("scale(0)");
+      setTimeout(onClose, 300); // Wait for the animation to complete before calling onClose
+    }, 0);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  if (!isVisible) return null;
+
   return (
-    <div className="flex flex-col md:flex-row h-screen">
-      <div className="w-full md:w-1/2 bg-gradient-to-r from-orange-300 to-blue-400 flex flex-col justify-center items-center opacity-0 md:opacity-100">
-        <div className="opacity-90">
-          <h1 className="text-2xl mb-4 text-white">Welcome!</h1>
-          <div className="flex items-center">
-            <span className="text-6xl font-bold text-white">W.</span>
-            <div className="ml-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-16 w-16 text-red-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <path d="M8 14s1.5 2 4 2 4-2 4-2" />
-                <circle cx="9" cy="9" r="1" />
-                <circle cx="15" cy="9" r="1" />
-              </svg>
-            </div>
+    <div className="fixed inset-0 flex items-center justify-center z-50">
+      <div
+        ref={modalRef}
+        className="bg-white rounded-lg shadow-lg w-full max-w-2xl p-4 sm:w-[60%] relative"
+        style={{ transform, transition: "transform 0.3s ease-in-out" }}
+      >
+        <button onClick={handleClose} className="absolute top-2 right-2 text-gray-500">
+          &times;
+        </button>
+        <h1
+          className="text-2xl font-extrabold p-4 pl-9"
+          style={{ wordSpacing: "7px" }}
+        >
+          Login to your Keyword Raja account and access all the free of cost
+          services
+        </h1>
+        <div className="flex flex-col items-center space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-x-2 sm:space-y-0">
+          <div className="w-full p-4 sm:w-[25rem] sm:p-8 mb-8">
+            <p className="mt-4 text-justify mb-2">
+              SignIn with
+              <a href="#" className="text-blue-500 ml-1.5">
+                Gmail
+              </a>
+            </p>
+            <form>
+              <div className="mb-4">
+                <input
+                  type="email"
+                  placeholder="Enter email or phone number"
+                  className="p-3 bg-[#A1A1A1] border-none rounded-lg text-black w-full"
+                  value={email}
+                  onChange={handleEmailChange}
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="password"
+                  placeholder="Enter a new password"
+                  className="p-3 bg-[#A1A1A1] border-none rounded-lg text-black w-full"
+                  value={password}
+                  onChange={handlePasswordChange}
+                />
+              </div>
+            </form>
+            <p className="mt-4 text-justify">
+              forgot password? Click
+              <a href="#" className="text-blue-500">
+                Here
+              </a>
+            </p>
           </div>
-          <p className="mt-4 text-white">
-            Not a member yet?
-            <Link to="/register" className="text-blue-500 opacity-100">
-              Register now
-            </Link>
-          </p>
         </div>
-      </div>
-      <div className="w-full md:w-1/2 flex flex-col bg-white justify-center items-center rounded-sm shadow-md">
-        <h2 className="text-3xl mb-6">Log in</h2>
-        <form className="w-3/4">
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="email"
-            >
-              Email or Username
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="text"
-              placeholder="Email or Username"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
-              placeholder="Password"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="inline-flex items-center">
-              <input type="checkbox" className="form-checkbox" />
-              <span className="ml-2">Keep me logged in</span>
-            </label>
-          </div>
-          <div className="mb-4">
-            <button
-              className="bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-              type="button"
-            >
-              Log in now
-            </button>
-          </div>
-          <div className="flex justify-between items-center">
-            <a href="#" className="text-blue-500">
-              Forgot your password?
-            </a>
-          </div>
-          <div className="mt-6">
-            <p className="text-center">Or sign in with</p>
-            <div className="flex justify-center mt-4">
-              <button className="bg-white border cursor-pointer border-gray-300 text-gray-700 font-bold py-2 px-4 rounded mx-2 relative group">
-                <span className="group-hover:scale-125 transition-transform">
-                  <i className="fa-brands fa-google"></i>
-                </span>
-              </button>
-              <button className="bg-white border cursor-pointer border-gray-300 text-gray-700 font-bold py-2 px-4 rounded mx-2 relative group">
-                <span className="group-hover:scale-125 transition-transform">
-                  <i className="fa-brands fa-facebook"></i>
-                </span>
-              </button>
-              <button className="bg-white border cursor-pointer border-gray-300 text-gray-700 font-bold py-2 px-4 rounded mx-2 relative group">
-                <span className="group-hover:scale-125 transition-transform">
-                  <i className="fa-brands fa-microsoft"></i>
-                </span>
-              </button>
-            </div>
-          </div>
-        </form>
+        <svg
+          className="absolute right-0 bottom-0 hidden sm:block sm:mr-4 sm:mb-4"
+          width="250"
+          height="250"
+          viewBox="0 0 360 398"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M54.9577 182.394L2.36267 391.782C1.56966 394.939 3.95687 398 7.21202 398H352.001C355.867 398 359.001 394.866 359.001 391V0L234.236 195.991L183.814 100.814L109.115 240.666L54.9577 182.394Z"
+            fill="#12153D"
+          />
+          <path
+            d="M1 199V398H347.2C353.827 398 359.2 392.627 359.2 386V199L259.7 290.54L180.1 199L100.5 290.54L1 199Z"
+            fill="#E5590F"
+          />
+        </svg>
       </div>
     </div>
   );
-};
+}
 
 export default LoginPage;

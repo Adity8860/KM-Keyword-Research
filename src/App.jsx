@@ -7,59 +7,57 @@ import {
 } from "react-router-dom";
 
 import Navbar from "./Components/Navbar/navbar.jsx";
-import Sidepanel from "./Components/SidePanel/sidePanel.jsx"; // Updated import statement
+import Sidepanel from "./Components/SidePanel/sidePanel.jsx";
 import KeywordData from "./Components/ShowData/keywordData.jsx";
 import LandingPage from "./Components/LangingPage/landingPage.jsx";
 import LoginPage from "./Components/Login&Registation/loginForm.jsx";
-import RegistrationPage from "./Components/Login&Registation/registation.jsx";
+import SignupPage from "./Components/Login&Registation/registation.jsx";
+import Layout from "./Components/Layout.jsx";
 
-// const BASE_URL = "https://km-keyword-research.vercel.app/"
+// Remove the duplicate Layout definition
+// const Layout = ({ children }) => {
+//   const location = useLocation();
+//   const showSidepanel = !["/login", "/register"].includes(location.pathname);
+//   const showNavbar = !["/login", "/register"].includes(location.pathname);
 
-// const PrivateRoute = () => (
-//   <div className='flex flex-grow-1'>
-//     <Sidepanel/>
-//     <div className='flex-grow-1 h-screen overflow-y-auto'>
-//       <Routes>
-//         <Route path="/" element={<KeywordData/>} />
-//         <Route path="/login" element={<LoginPage />} />
-//         <Route path="/register" element={<RegistrationPage />} />
-//       </Routes>
+//   return (
+//     <div>
+//       {showNavbar && <Navbar />}
+//       <div className="app flex flex-col md:flex-row h-screen">
+//         {showSidepanel && <Sidepanel className="w-full md:w-1/4" />}
+//         <div className="content-container flex-grow">{children}</div>
+//       </div>
 //     </div>
-//   </div>
-// );  console.log("Current location:", location.pathname);
+//   );
+// };
 
 const AppContent = () => {
-  const location = useLocation();
-  const showSidepanel = !["/","/login", "/register"].includes(location.pathname);
-  const showNavbar = !["/login", "/register"].includes(location.pathname);
-
-  console.log("Current location:", location.pathname);
-
   return (
-    <div>
-      {showNavbar && <Navbar />}
-      <div className="app flex flex-col md:flex-row h-screen">
-        {showSidepanel && <Sidepanel className="w-full md:w-1/4" />}
-        <div className={`content-container flex-grow`}>
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegistrationPage />} />
-            <Route path="/keyword" element={<KeywordData />} />
-            <Route path="/" element={<LandingPage />} />
-          </Routes>
-        </div>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignupPage />} /> 
+      <Route path="/" element={<LandingPage />} />
+      <Route
+        path="*"
+        element={
+          <Layout className="w-full">
+            <Routes>
+             
+              <Route path="/keyword-volume" element={<KeywordData />} />
+              {/* Add other routes here */}
+            </Routes>
+          </Layout>
+        }
+      />
+    </Routes>
   );
 };
 
 function App() {
   return (
-    <>
-      <Router basename='/'> 
-        <AppContent />
-      </Router>
-    </>
+    <Router basename="/">
+      <AppContent />
+    </Router>
   );
 }
 

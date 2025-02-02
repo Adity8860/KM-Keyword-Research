@@ -1,83 +1,89 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import LoginPage from "../Login&Registation/loginForm";
 
 const Navbar = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoginVisible, setIsLoginVisible] = useState(false);
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+  const toggleNavbar = () => {
+    setIsOpen(!isOpen);
   };
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const showLogin = () => {
+    setIsLoginVisible(true);
   };
 
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
-    setIsDropdownOpen(false);
-    setIsMenuOpen(false);
+  const hideLogin = () => {
+    setIsLoginVisible(false);
   };
 
   return (
     <>
-      <div className="flex bg-white h-full p-4 justify-between items-center px-4 md:px-28 text-gray-600">
-        <div className="flex items-center">
-          <span>LOGO</span>
-        </div>
-        <div className="md:hidden flex items-center">
-          <button onClick={toggleMenu}>
-            <i className={`fas ${isMenuOpen ? "fa-times" : "fa-bars"}`}></i>
-          </button>
-        </div>
-        <div className={`absolute top-16 right-0 w-full ${isMenuOpen ? "block" : "hidden"} md:relative md:top-0 md:block`}>
-          <ul className="w-full md:px-2 ml-0 md:flex md:space-x-2 justify-end text-right">
-            <li className="p-4 relative group cursor-pointer" onClick={toggleDropdown}>
-              <span className="text-gray-500 font-semibold">Keyword Research Tools</span>
-              <span
-                className={`ml-2 text-gray-500 transform transition-transform duration-300 ${
-                  isDropdownOpen ? "rotate-180" : ""
-                }`}
-              >
-                <i className={`fas ${isDropdownOpen ? "fa-chevron-up" : "fa-chevron-down"}`}></i>
-              </span>{" "}
-              <ul
-                className={`absolute right-0 top-full transition-all duration-300 ${
-                  isDropdownOpen ? "opacity-100 visible max-h-96" : "opacity-0 invisible max-h-0"
-                } bg-white overflow-hidden`}
-              >
-                {["Keyword Volume", "Keyword Difficulty", "Tool 3"].map((option) => (
-                  <li
-                    key={option}
-                    className={`p-4 cursor-pointer ${
-                      selectedOption === option ? "bg-orange-100 text-orange-500 rounded-lg" : ""
-                    }`}
-                    onClick={() => handleOptionClick(option)}
-                  >
-                    {option}
-                  </li>
-                ))}
-              </ul>
-            </li>
-            {["Blogs", "Tools", "Contact"].map((option) => (
-              <li
-                key={option}
-                className={`p-4 cursor-pointer font-semibold ${
-                  selectedOption === option ? "bg-orange-100 text-orange-500 rounded-lg" : ""
-                }`}
-                onClick={() => handleOptionClick(option)}
-              >
-                {option}
+      <nav className="bg-white w-full px-8 md:px-auto">
+        <div className="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
+          <div className="flex items-center flex-shrink-0 text-gray-700 order-1 md:order-none md:mr-6 mx-auto md:mx-0">
+            <svg
+              width="40" // Changed from 50 to 40 for small screens
+              height="40" // Changed from 50 to 40 for small screens
+              viewBox="0 0 360 398"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              
+            >
+              <path
+                d="M54.9577 182.394L2.36267 391.782C1.56966 394.939 3.95687 398 7.21202 398H352.001C355.867 398 359.001 394.866 359.001 391V0L234.236 195.991L183.814 100.814L109.115 240.666L54.9577 182.394Z"
+                fill="#12153D"
+              />
+              <path
+                d="M1 199V398H347.2C353.827 398 359.2 392.627 359.2 386V199L259.7 290.54L180.1 199L100.5 290.54L1 199Z"
+                fill="#E5590F"
+              />
+            </svg>
+            <div>
+              <span className="text-xl md:text-2xl font-bold"> 
+                Keyword <span className="text-orange-500">Raja</span>
+              </span>
+            </div>
+          </div>
+          <div className="text-gray-500 order-3 w-full md:w-auto md:order-2">
+            <ul className="flex font-semibold justify-between items-center">
+              <li className="md:px-4 md:py-2 text-gray-500">
+                <a href="#">Homepage</a>
               </li>
-            ))}
-            <Link to="/login"> <li className="flex items-center justify-center hover:bg-orange-100 cursor-pointer rounded-lg p-2">
-              <button className="bg-orange-500 text-white p-2 cursor-pointer rounded-lg">Login</button>
-            </li></Link>
-           
-          </ul>
+              <li className="md:px-4 md:py-2 hover:text-gray-400">
+                <a href="#">Blog</a>
+              </li>
+              <li className="md:px-4 md:py-2 hover:text-gray-400">
+                <a href="#">Forum</a>
+              </li>
+              <li className="md:px-4 md:py-2 hover:text-gray-400">
+                <a href="#">Contact</a>
+              </li>
+            </ul>
+          </div>
+          <div className="order-2 md:order-3">
+            <button
+              onClick={showLogin}
+              className="px-4 py-2 bg-orange-400 hover:bg-orange-500 text-gray-50 rounded-xl flex items-center gap-2"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span>Login</span>
+            </button>
+          </div>
         </div>
-      </div>
+      </nav>
+      <LoginPage isVisible={isLoginVisible} onClose={hideLogin} />
     </>
   );
 };
