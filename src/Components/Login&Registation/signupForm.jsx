@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-function SignupPage() {
+function SignupPage({ onClose }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [agree, setAgree] = useState(false);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    setIsOpen(true);
+  }, []);
 
   const handleSignup = () => {
     // Handle sign-up logic here
@@ -22,6 +26,7 @@ function SignupPage() {
 
   const handleClose = () => {
     setIsOpen(false);
+    setTimeout(onClose, 300); // Wait for the animation to complete before calling onClose
   };
 
   if (!isOpen) return null;
