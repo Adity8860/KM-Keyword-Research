@@ -42,9 +42,9 @@ function LoginPage({ isVisible, onClose }) {
     setSignupVisible(true);
   };
 
-  // const handleCloseSignup = () => {
-  //   setSignupVisible(false);
-  // };
+  const handleCloseSignup = () => {
+    setSignupVisible(false);
+  };
 
   if (!isVisible) return null;
 
@@ -53,10 +53,7 @@ function LoginPage({ isVisible, onClose }) {
       {isSignupVisible ? (
         <div>
           <div className="order-2 md:order-3 w-full grid justify-center item-center ">
-            <SignupPage />
-            {/* <button onClick={handleCloseSignup} className="absolute top-2 right-2 text-gray-500">
-              &times;
-            </button> */}
+            <SignupPage onClose={handleCloseSignup} />
           </div>
         </div>
       ) : (

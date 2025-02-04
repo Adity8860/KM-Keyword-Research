@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import data3 from "../../assets/data3.js";
+import SignupPage from "../Login&Registation/signupForm.jsx"
 // import { Bar } from 'react-chartjs-2'; // Removed Bar import
 
 const KeywordData = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [keywordData, setKeywordData] = useState(null);
+ const [isSignupVisible, setSignupVisible] = useState(false);
 
   const handleSearch = () => {
     const result = data3.find(
@@ -13,11 +15,34 @@ const KeywordData = () => {
     setKeywordData(result);
   };
 
+  const handleGmailClick = () => {
+    setSignupVisible(true);
+  };
+
+  const handleSignupClick = () => {
+    setSignupVisible(true);
+  };
+
+  const handleCloseSignup = () => {
+    setSignupVisible(false);
+  };
+
   // Removed chart options and data
 
   return (
     <>
       <div className="w-full bg-white grid grid-cols-1 p-6 rounded-lg animate-fade-in">
+      {isSignupVisible ? (
+        <div>
+          <div className="order-2 md:order-3 w-full grid justify-center item-center ">
+            <SignupPage onClose={handleCloseSignup} />
+            {/* <button onClick={handleCloseSignup} className="absolute top-2 right-2 text-gray-500">
+              &times;
+            </button> */}
+          </div>
+        </div>
+      ) : (
+        <>
         <div className="grid bg-gradient-to-r shadow-md from-orange-500 to-blue-600 p-5 rounded-lg text-white mx-auto w-full max-w-full">
           <div className="p-9 sm:pl-4 md:pl-10">
             <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-6xl mb-4 font-sans font-extrabold">
@@ -153,12 +178,17 @@ const KeywordData = () => {
               <h1 className="text-md sm:text-lg text-bold lg:text-2xl">
                 Make your account for free
               </h1>
-              <button className="bg-white mt-2 text-gray-600 p-2 w-[8rem] sm:w-[12rem] rounded-xl text-center cursor-pointer">
+              <button 
+                className="bg-white mt-2 text-gray-600 p-2 w-[8rem] sm:w-[12rem] rounded-xl text-center cursor-pointer"
+                onClick={handleSignupClick}
+              >
                 click here
               </button>
             </div>
           </div>
         </div>
+        </>
+      )}
       </div>
     </>
   );
