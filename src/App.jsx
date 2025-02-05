@@ -35,14 +35,14 @@ const AppContent = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
      
-      <Route path="/" element={<LandingPage />} />
+      {/* <Route path="/" element={<LandingPage />} /> */}
       <Route
         path="*"
         element={
           <Layout className="w-full">
             <Routes>
              
-              <Route path="/keyword-volume" element={<KeywordData />} />
+              <Route path="/" element={<KeywordData />} />
               {/* Add other routes here */}
             </Routes>
           </Layout>

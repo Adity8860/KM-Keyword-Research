@@ -111,7 +111,7 @@ const LandingPage = () => {
             </div>
           </div>
           {showPopup && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="fixed inset-0 flex items-center justify-center bg-opacity-50">
               <div className="bg-white p-4 rounded shadow-lg">
                 <h2 className="text-lg font-bold text-[#8193a6]">
                   Keyword Results

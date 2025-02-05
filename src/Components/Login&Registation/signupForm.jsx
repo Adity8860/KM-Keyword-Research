@@ -8,6 +8,7 @@ function SignupPage({ onClose }) {
 
   useEffect(() => {
     setIsOpen(true);
+    return () => setIsOpen(false);
   }, []);
 
   const handleSignup = () => {
@@ -32,7 +33,7 @@ function SignupPage({ onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="relative">
+    <div className={`relative ${isOpen ? 'animate-zoomIn' : 'animate-zoomOut'}`}>
       <div
         className="bg-white p-8 rounded-lg w-full max-w-3xl"
         style={{
@@ -48,7 +49,7 @@ function SignupPage({ onClose }) {
           &times;
         </button>
         <div className="absolute inset-0 opacity-50 pointer-events-none"></div>
-        <div className="p-4 rounded-lg w-full max-w-md mx-auto mr-60">
+        <div className="p-6 rounded-lg w-full max-w-md mx-auto mr-100">
           <h2 className="text-2xl font-bold mb-1">Create Account</h2>
           <p className="mb-6 text-md text-gray-500 text-bold">
             Grow your business like a Raja

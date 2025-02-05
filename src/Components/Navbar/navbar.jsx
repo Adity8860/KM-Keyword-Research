@@ -65,7 +65,7 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <div className="order-2 md:order-3">
+          <div className="order-2 md:order-3 ">
             <button
               onClick={showLogin}
               className="px-4 py-2 bg-orange-400 hover:bg-orange-500 text-gray-50 rounded-xl flex items-center gap-2"
