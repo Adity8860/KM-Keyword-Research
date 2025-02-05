@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+ 
 
 const countries = [
   { code: "us", name: "United States" },
@@ -112,39 +112,35 @@ const LandingPage = () => {
             ))}
           </select>
 
-                  <select className="p-3 border-1 border-[#9cb78b] text-sm   rounded-full  focus:outline-none   text-[#8dbe57]">
-                    <option>Select Language</option>
-                    {languages.map((language) => (
-                      <option key={language.code} value={language.code}>
-                        {language.code.toUpperCase()} - {language.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-          {showPopup && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-              <div className="bg-white p-4 rounded shadow-lg">
-                <h2 className="text-lg font-bold text-[#8193a6]">
-                  Keyword Results
-                </h2>
-                <p>
-                  Your keyword results for "{keywordResults}" will be displayed
-                  here.
-                </p>
-                <button
-                  onClick={() => setShowPopup(false)}
-                  className="mt-4 p-2 bg-[#0074b1] text-white rounded-md"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          )}
+          <select
+            className="p-3 border-1 border-[#9cb78b] text-sm rounded-full focus:outline-none text-[#8dbe57]"
+            value={selectedLanguage}
+            onChange={(e) => setSelectedLanguage(e.target.value)}
+          >
+            <option value="">Select Language</option>
+            {languages.map((language) => (
+              <option key={language.code} value={language.code}>
+                {language.code.toUpperCase()} - {language.name}
+              </option>
+            ))}
+          </select>
         </div>
-      </div>{" "}
+      </div>
+
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded shadow-lg">
+            <h2 className="text-lg font-bold text-[#8193a6]">Keyword Results</h2>
+            <p>Your keyword results for "{keyword}" will be displayed here.</p>
+            <button
+              onClick={() => setShowPopup(false)}
+              className="mt-4 p-2 bg-[#0074b1] text-white rounded-md"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
