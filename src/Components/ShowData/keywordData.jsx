@@ -31,6 +31,9 @@ const KeywordData = () => {
 
   return (
     <>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
+      </style>
       <div className="w-full bg-white grid grid-cols-1 p-6 rounded-lg animate-fade-in">
       {isSignupVisible ? (
         <div>
@@ -43,9 +46,9 @@ const KeywordData = () => {
         </div>
       ) : (
         <>
-        <div className="grid bg-gradient-to-r shadow-md from-orange-500 to-blue-600 p-5 rounded-lg text-white mx-auto w-full max-w-full">
+        <div id="info-card" className="grid bg-gradient-to-r shadow-md from-orange-500 to-blue-900 p-4 rounded-lg text-white mx-auto w-full max-w-full" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
           <div className="p-9 sm:pl-4 md:pl-10">
-            <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-6xl mb-4 font-sans font-extrabold">
+            <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-6xl mb-4  font-semibold">
               Why do you need SEO?
             </h1>
             <ul className="list-disc list-inside mt-2">
@@ -94,7 +97,7 @@ const KeywordData = () => {
                     {keywordData.relatedKeywordsCount} result for {searchTerm}
                   </h1>
                 </div>
-                <ol className="p-4 max-h-100 overflow-y-auto">
+                <ol className="p-4 max-h-122 overflow-y-auto">
                   {keywordData.relatedKeywords.map((item, index) => (
                     <li key={index} className="text-xs sm:text-sm md:text-base">{item}</li>
                   ))}
@@ -164,7 +167,7 @@ const KeywordData = () => {
             </div>
           )}
         </div>
-        <div className="w-full relative h-30 mt-4" id="hover">
+        <div className="w-full relative h-30 mt-4 hidden sm:block" id="hover">
           <div className="absolute rounded-lg h-full inset-0 flex items-center justify-center border-1 border-gray-500 text-white text-lg transition-opacity duration-300 ease-in-out z-10 opacity-100 hover:opacity-0 p-4 sm:p-10">
             <div className="items-center">
               <p className="text-black text-md sm:text-lg p-2 sm:p-4 lg:text-xl">

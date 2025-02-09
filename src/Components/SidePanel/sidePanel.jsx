@@ -16,25 +16,27 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="md:hidden fixed top-0 left-0 p-6">
+      <div className="md:hidden fixed top-4 left-4 z-50">
         <button onClick={toggleSidebar} className="bg-transparent border-none">
-          <i className={`fas ${isSidebarOpen ? "fa-times" : "fa-bars"} text-2xl`}></i>
+          <i
+            className={`fas ${isSidebarOpen ? "fa-times" : "fa-bars"} text-2xl`}
+          ></i>
         </button>
       </div>
       <div
-        className={`bg-[#12153D] text-white p-6 w-72 mt-4 rounded-lg fixed md:relative transition-transform duration-300 ${
+        className={`bg-[#12153D] text-white p-6 w-72 h-screen mt-4 rounded-lg fixed md:relative transition-transform duration-300 ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0 md:ml-6 md:mr-4`}
+        } md:translate-x-0 md:ml-6 md:mr-4 ${
+          isSidebarOpen ? "w-full h-full" : "w-72"
+        }`}
       >
         <div className="flex items-center justify-between mb-6">
-          <div>
+          <div className="flex justify-center items-center space-x-5.5">
             <i className="fas fa-user-circle text-5xl bg-blue-500 rounded-full mb-6"></i>
-          </div>
-          <div className="mb-4 mr-3">
             <span className="mb-4 mr-3"> New User</span>
           </div>
         </div>
-        
+
         {[
           { name: "Keyword volume", path: "/keyword-volume" },
           { name: "Competetive Research", path: "/competetive-research" },
@@ -45,7 +47,9 @@ const Sidebar = () => {
           { name: "Advertising", path: "/advertising" },
           { name: "Social Media", path: "/social-media" },
         ].map((option) => (
-          <Link to={option.path} key={option.name}> {/* Add Link component */}
+          <Link to={option.path} key={option.name}>
+            {" "}
+            {/* Add Link component */}
             <div
               className={`mb-4 p-3 text-white cursor-pointer rounded ${
                 selectedOption === option.name

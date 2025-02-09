@@ -49,7 +49,7 @@ function LoginPage({ isVisible, onClose }) {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50">
       {isSignupVisible ? (
         <div>
           <div className="order-2 md:order-3 w-full grid justify-center item-center ">
