@@ -11,6 +11,7 @@ import LandingPage from "./Components/LangingPage/landingPage.jsx";
 import LoginPage from "./Components/Login&Registation/loginForm.jsx";
 import SignupPage from "./Components/Login&Registation/signupForm.jsx";
 import Layout from "./Components/Layout.jsx";
+import KeywordResearch from "./pages/KeywordResearch.jsx";
 
 // Remove the duplicate Layout definition
 // const Layout = ({ children }) => {
@@ -35,13 +36,13 @@ const AppContent = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
      
-      {/* <Route path="/" element={<LandingPage />} /> */}
+ 
       <Route
         path="*"
         element={
           <Layout className="w-full">
             <Routes>
-             
+               <Route path="/keyword-volume" element={<KeywordResearch />} />   
               <Route path="/" element={<KeywordData />} />
               {/* Add other routes here */}
             </Routes>
