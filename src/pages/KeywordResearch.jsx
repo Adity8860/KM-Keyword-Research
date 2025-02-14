@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import data3 from "../assets/data3.js";
 import { Bar, BarChart } from "recharts";
+import HoverFeatures from "../Components/HoverFeatures.jsx";
 
 export const KeywordResearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -83,7 +84,7 @@ export const KeywordResearch = () => {
                       {keywordData.relatedKeywordsCount} result for {searchTerm}
                     </h1>
                   </div>
-                  <ol className="p-4 max-h-122 overflow-y-auto">
+                  <ol className="p-4 max-h-130 overflow-y-auto">
                     {keywordData.relatedKeywords.map((item, index) => (
                       <li
                         key={index}
@@ -95,32 +96,13 @@ export const KeywordResearch = () => {
                   </ol>
                 </div>
                 <div className="w-full sm:pl-3 mt-4 sm:mt-0">
-                  <div className="flex min-h-[18rem] border-none rounded-lg justify-between items-center bg-gray-300 p-3">
+                  <div className="flex min-h-[14.5rem] border-none rounded-lg justify-between items-center bg-gray-300 p-3">
                     <h1 className="flex justify-center items-center text-center text-xl sm:text-sm md:text-base">
                       ADS
                     </h1>
                   </div>
-                  <div className="flex flex-col p-4 border-1 border-gray-500 mt-4 rounded-lg">
-                    <h1 className="text-xl font-poppins font-bold">
-                      Understand the features
-                    </h1>
-                    <ul className="flex flex-col justify-center gap-y-1.5 mt-2 font-sans font-semibold">
-                      <li className="p-1 w-35 rounded-md border-1 border-gray-500">
-                        keyword volume
-                      </li>
-                      <li className="p-1 w-40 rounded-md border-1 border-gray-500">
-                        keyword Difficulty
-                      </li>
-                      <li className="p-1 w-35 rounded-md border-1 border-gray-500">
-                        spam risk score
-                      </li>
-                      <li className="p-1 w-35 rounded-md border-1 border-gray-500">
-                        trend
-                      </li>
-                      <li className="p-1 w-35 rounded-md border-1 border-gray-500">
-                        search intent
-                      </li>
-                    </ul>
+                  <div className="p-4 border-1 border-gray-500 mt-4 rounded-lg">
+                   <HoverFeatures />
                   </div>
                 </div>
               </div>
