@@ -69,15 +69,15 @@ function LoginPage({ isVisible, onClose }) {
             &times;
           </button>
           <h1
-            className="text-2xl font-extrabold p-4 pl-9"
+            className="text-2xl font-extrabold p-4 pl-9 text-center sm:text-left"
             style={{ wordSpacing: "7px" }}
           >
             Login to your Keyword Raja account and access all the free of cost
             services
           </h1>
           <div className="flex flex-col items-center space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-x-2 sm:space-y-0">
-            <div className="w-full  sm:w-[25rem] sm:p-8 mb-8">
-              <p className="mt-4 text-justify mb-2">
+            <div className="w-full sm:w-[25rem] sm:p-8 mb-8">
+              <p className="mt-4 text-justify mb-2   sm:text-left">
                 SignIn with
                 <a
                   href="#"
@@ -106,10 +106,16 @@ function LoginPage({ isVisible, onClose }) {
                     onChange={handlePasswordChange}
                   />
                 </div>
+                <button
+                  type="submit"
+                  className="p-3 bg-[#12153D] text-white rounded-lg w-full"
+                >
+                  Login
+                </button>
               </form>
-              <p className="mt-4 text-justify">
+              <p className="mt-4 text-justify sm:text-left">
                 forgot password? Click
-                <a href="#" className="text-blue-500">
+                <a href="#" className="text-blue-500 ml-1.5">
                   Here
                 </a>
               </p>
