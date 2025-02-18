@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import data3 from "../assets/data3.js";
 import { Bar, BarChart } from "recharts";
 import HoverFeatures from "../Components/HoverFeatures.jsx";
+import LoginPage from "../Components/Login&Registation/loginForm.jsx";
+ 
 
 export const KeywordResearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [keywordData, setKeywordData] = useState(null);
   const [spamData, setSpamData] = useState(getSpamRiskData("apple")); // Using a default keyword
+  const [isLoginVisible, setIsLoginVisible] = useState(false);
 
   const normalizedScore = Math.max(0, Math.min(100, spamData.spamRisk));
   const level =
@@ -33,6 +36,25 @@ export const KeywordResearch = () => {
       }
     );
   }
+  const showLogin = () => {
+    setIsLoginVisible(true);
+  };
+
+  const hideLogin = () => {
+    setIsLoginVisible(false);
+  };
+
+  useEffect(() => {
+    console.log("isLoginVisible:", isLoginVisible);
+  }, [isLoginVisible]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (!token) {
+      setIsLoginVisible(true);
+    }
+  }, []);
+   
 
   return (
     <div className="w-full bg-white grid p-5 rounded-lg">
@@ -198,6 +220,7 @@ export const KeywordResearch = () => {
           </>
         )}
       </div>
+      {isLoginVisible && <LoginPage isVisible={isLoginVisible} onClose={hideLogin} />}
     </div>
   );
 };

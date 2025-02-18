@@ -91,12 +91,12 @@ function LoginPage({ isVisible, onClose }) {
           className="bg-white rounded-lg shadow-lg w-full max-w-2xl p-4 sm:w-[60%] relative"
           style={{ transform, transition: "transform 0.3s ease-in-out" }}
         >
-          <button
+          {/* <button
             onClick={handleClose}
             className="absolute top-2 right-2 text-gray-500"
           >
             &times;
-          </button>
+          </button> */}
           <h1
             className="text-2xl font-extrabold p-4 pl-9 text-center sm:text-left"
             style={{ wordSpacing: "7px" }}

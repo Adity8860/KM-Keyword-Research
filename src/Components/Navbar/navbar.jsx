@@ -21,11 +21,24 @@ const Navbar = () => {
     console.log("isLoginVisible:", isLoginVisible);
   }, [isLoginVisible]);
 
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (!token) {
+      setIsLoginVisible(true); // Show login if no JWT found
+    }
+  }, []);
+
   return (
+    
     <>
+      <style>
+        @import
+        url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
+      </style>
       <nav className="bg-white w-full px-8 md:px-auto">
         <div className="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
           <div className="flex items-center flex-shrink-0 text-gray-700 order-1 md:order-none md:mr-6 mx-auto md:mx-0">
+            <a href="/" className="flex items-center">
             <svg
               width="40" // Changed from 50 to 40 for small screens
               height="40" // Changed from 50 to 40 for small screens
@@ -44,10 +57,11 @@ const Navbar = () => {
               />
             </svg>
             <div>
-              <span className="text-xl md:text-2xl font-bold"> 
+              <span className="text-xl md:text-3xl font-bold" style={{ fontFamily: "Space Grotesk, sans-serif" }}> 
                 Keyword <span className="text-orange-500">Raja</span>
               </span>
             </div>
+          </a>
           </div>
           <div className="text-gray-500 order-3 w-full md:w-auto md:order-2">
             <ul className="flex font-semibold justify-between items-center">
