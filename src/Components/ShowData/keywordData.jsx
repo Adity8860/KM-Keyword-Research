@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import data3 from "../../assets/data3.js";
 import SignupPage from "../Login&Registation/signupForm.jsx";
+import axios from "axios";
 // import { Bar } from 'react-chartjs-2'; // Removed Bar import
 
 const KeywordData = () => {
@@ -8,12 +9,34 @@ const KeywordData = () => {
   const [keywordData, setKeywordData] = useState(null);
   const [isSignupVisible, setSignupVisible] = useState(false);
 
-  const handleSearch = () => {
-    const result = data3.find(
-      (item) => item.keyword.toLowerCase() === searchTerm.toLowerCase()
-    );
-    setKeywordData(result);
+  const handleSearch = async () => {
+    if (!searchTerm.trim()) return; // Prevent empty search
+  
+    try {
+      // Make the GET request to the backend
+      const response = await axios.get(
+        `https://keyword-research3.onrender.com/api/scraper/scrape`, 
+        {
+          params: {
+            query: searchTerm, // The search term entered by the user
+            location_code: "in", // Example location code (adjust if needed)
+            language_code: "en", // Example language code (adjust if needed)
+            limit: 200, // Limit the number of results
+          },
+        }
+      );
+  
+      // Set the keyword data after a successful API call
+      setKeywordData({
+        relatedKeywords: response.data.keywords,
+        relatedKeywordsCount: response.data.keywords.length,
+      });
+    } catch (error) {
+      console.error("Error fetching keywords:", error);
+      setKeywordData(null); // Handle error by setting keyword data to null
+    }
   };
+  
 
   const handleGmailClick = () => {
     setSignupVisible(true);
@@ -100,7 +123,7 @@ const KeywordData = () => {
                   <div className="w-full h-full border-1 border-gray-500 p-4 rounded-lg">
                     <div className="p-4 shadow-lg rounded-lg">
                       <h1 className="text-lg sm:text-xl text-bold">
-                        {keywordData.relatedKeywordsCount} result for{" "}
+                        {keywordData.relatedKeywordsCount} result for{searchTerm}
                         {searchTerm}
                       </h1>
                     </div>
@@ -226,11 +249,3 @@ const KeywordData = () => {
 
 export default KeywordData;
 
-// Add the following CSS to your stylesheet or a CSS-in-JS solution
-// @keyframes fade-in {
-//   0% { opacity: 0; }
-//   100% { opacity: 1; }
-// }
-// .animate-fade-in {
-//   animation: fade-in 1s ease-in-out;
-// }
