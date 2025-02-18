@@ -54,7 +54,7 @@ function LoginPage({ isVisible, onClose }) {
   
     try {
       // Make login request to backend
-      const response = await axios.post("http://localhost:5000/api/auth/login", {
+      const response = await axios.post("https://keyword-research3.onrender.com/api/auth/login", {
         email: email,
         password: password,
       });
