@@ -10,34 +10,37 @@ const KeywordData = () => {
   const [isSignupVisible, setSignupVisible] = useState(false);
 
   const handleSearch = async () => {
-    if (!searchTerm.trim()) return; // Prevent empty search
+    if (!searchTerm.trim()) return;
   
     try {
-      // Make the GET request to the backend
-      const response = await axios.get(
-        `https://keyword-research3.onrender.com/api/scraper/scrape`, 
-        {
-          params: {
-            query: searchTerm, // The search term entered by the user
-            location_code: "in", // Example location code (adjust if needed)
-            language_code: "en", // Example language code (adjust if needed)
-            limit: 200, // Limit the number of results
-          },
-        }
+      // First API call: Scraping keyword data
+      const scrapeResponse = await axios.get(`https://keyword-research3.onrender.com/api/scraper/scrape`, {
+        params: {
+          query: searchTerm,
+          location_code: "in",
+          language_code: "en",
+          limit: 200,
+        },
+      });
+  
+      // Second API call: Fetching volume and difficulty
+      const volumeDifficultyResponse = await axios.post(
+        `https://keyword-research3.onrender.com/api/gemini/get-keyword-volume-difficulty`, 
+        { keyword: searchTerm }  // Send `keyword` in the body as per backend's requirement
       );
   
-      // Set the keyword data after a successful API call
       setKeywordData({
-        relatedKeywords: response.data.keywords,
-        relatedKeywordsCount: response.data.keywords.length,
+        relatedKeywords: scrapeResponse.data.keywords,
+        relatedKeywordsCount: scrapeResponse.data.keywords.length,
+        volume: volumeDifficultyResponse.data.analysisResult.keywordVolume,  // Ensure correct field names here
+        difficulty: volumeDifficultyResponse.data.analysisResult.keywordDifficulty, // Ensure correct field names
       });
     } catch (error) {
-      console.error("Error fetching keywords:", error);
-      setKeywordData(null); // Handle error by setting keyword data to null
+      console.error("Error fetching data:", error);
+      setKeywordData(null);
     }
   };
   
-
   const handleGmailClick = () => {
     setSignupVisible(true);
   };
