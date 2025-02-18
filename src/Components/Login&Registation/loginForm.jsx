@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import SignupPage from "./signupForm";
+import { useNavigate } from "react-router-dom"; // To navigate to /keyword-volume after login
+import axios from "axios"; // Axios for HTTP requests
 
 function LoginPage({ isVisible, onClose }) {
   const modalRef = useRef(null);
   const [transform, setTransform] = useState("scale(0)");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isSignupVisible, setSignupVisible] = useState(false); // State for signup visibility
+  const [isSignupVisible, setSignupVisible] = useState(false);
+  const navigate = useNavigate(); // For redirecting to /keyword-volume after login
 
   useEffect(() => {
     if (isVisible) {
@@ -26,7 +29,7 @@ function LoginPage({ isVisible, onClose }) {
     setTransform("scale(1)");
     setTimeout(() => {
       setTransform("scale(0)");
-      setTimeout(onClose, 300); // Wait for the animation to complete before calling onClose
+      setTimeout(onClose, 300);
     }, 0);
   };
 
@@ -45,6 +48,32 @@ function LoginPage({ isVisible, onClose }) {
   const handleCloseSignup = () => {
     setSignupVisible(false);
   };
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+  
+    try {
+      // Make login request to backend
+      const response = await axios.post("http://localhost:5000/api/auth/login", {
+        email: email,
+        password: password,
+      });
+  
+      // Store JWT and username in localStorage
+      localStorage.setItem("jwt", response.data.token); // Assuming the JWT is in `response.data.token`
+      localStorage.setItem("username", response.data.name); // Assuming the username is in `response.data.name`
+  
+      // Close the login popup
+      onClose();
+  
+      // Redirect to the /keyword-volume page
+      navigate("/keyword-volume");
+    } catch (error) {
+      console.error("Error logging in:", error);
+      alert("Login failed. Please check your credentials.");
+    }
+  };
+  
 
   if (!isVisible) return null;
 
@@ -77,7 +106,7 @@ function LoginPage({ isVisible, onClose }) {
           </h1>
           <div className="flex flex-col items-center space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-x-2 sm:space-y-0">
             <div className="w-full sm:w-[25rem] sm:p-8 mb-8">
-              <p className="mt-4 text-justify mb-2   sm:text-left">
+              <p className="mt-4 text-justify mb-2 sm:text-left">
                 SignIn with
                 <a
                   href="#"
@@ -87,7 +116,7 @@ function LoginPage({ isVisible, onClose }) {
                   Gmail
                 </a>
               </p>
-              <form>
+              <form onSubmit={handleLoginSubmit}>
                 <div className="mb-4">
                   <input
                     type="email"
@@ -95,6 +124,7 @@ function LoginPage({ isVisible, onClose }) {
                     className="p-3 bg-[#A1A1A1] border-none rounded-lg text-black w-full"
                     value={email}
                     onChange={handleEmailChange}
+                    required
                   />
                 </div>
                 <div className="mb-4">
@@ -104,6 +134,7 @@ function LoginPage({ isVisible, onClose }) {
                     className="p-3 bg-[#A1A1A1] border-none rounded-lg text-black w-full"
                     value={password}
                     onChange={handlePasswordChange}
+                    required
                   />
                 </div>
                 <button
