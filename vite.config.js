@@ -9,4 +9,13 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  // server: {
+  //   host: true, // Enable to listen on all addresses, including LAN
+  //   port: 5173, // Specify the port
+  //   hmr: {
+  //     protocol: 'ws', // Use WebSocket protocol
+  //     host: 'localhost', // Specify the host for HMR
+  //     port: 5173, // Specify the port for HMR
+  //   },
+  // },
 })

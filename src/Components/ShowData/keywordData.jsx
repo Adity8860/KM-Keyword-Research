@@ -126,7 +126,7 @@ const KeywordData = () => {
                   <div className="w-full h-full border-1 border-gray-500 p-4 rounded-lg">
                     <div className="p-4 shadow-lg rounded-lg">
                       <h1 className="text-lg sm:text-xl text-bold">
-                        {keywordData.relatedKeywordsCount} result for{searchTerm}
+                        {keywordData.relatedKeywordsCount} results for{searchTerm}
                         {searchTerm}
                       </h1>
                     </div>

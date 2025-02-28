@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
         <div className="flex flex-col justify-between w-full md:w-auto">
           {children}
         </div>
-        <div className="hidden md:block">ADS</div>
+        <div className="hidden md:block p-4 ml-4">ADS</div>
       </div>
     </div>
   );
