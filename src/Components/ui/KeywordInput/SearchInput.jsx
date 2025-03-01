@@ -13,6 +13,7 @@ const SearchInput = ({ onSearch }) => {
     <div className="w-full lg:min-w-[56rem]">
       <div className="w-full max-w-full mt-4 mx-auto shadow-sm p-1 rounded-lg flex items-center border-1 border-gray-500">
         <input
+        className="border-none outline-none"
           type="text"
           placeholder="Search keyword..."
           value={searchTerm}

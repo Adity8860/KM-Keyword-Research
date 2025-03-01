@@ -20,11 +20,11 @@ const SpamScore = () => {
   };
 
   return (
-    <div className="w-full bg-white grid p-5 rounded-lg">
+    <div className="w-full bg-white   p-5 rounded-lg">
       <div className="w-full lg:min-w-[40rem]">
         <BannerAds />
       </div>
-      <div className="w-full max-w-[60rem] mx-auto p-1 mt-2 rounded-lg">
+      <div className="w-full max-w-[895px] mx-auto p-1 mt-2 rounded-lg">
         <div className="w-full lg:min-w-[40rem]">
           <SearchInput onSearch={handleSearch} />
         </div>
@@ -59,15 +59,15 @@ const SpamScore = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="p-19 bg-[#12153D] rounded-lg text-white text-center lg:text-left mt-4">
+                    <div className="p-21 bg-[#12153D] rounded-lg text-white text-center lg:text-left mt-4">
                       <h1 className="text-xl">
                         This word appears in engines which might raise a red
                         flag.
                       </h1>
                     </div>
                   </div>
-                  <div className="w-full lg:w-1/2 lg:ml-4 mt-4 lg:mt-0">
-                    <div className="p-8 bg-[#12153D] rounded-lg text-white h-75 text-center lg:text-left">
+                  <div className=" pr-4 pl-4">
+                    <div className="p-8 bg-[#12153D] rounded-lg text-white h-[330px] w-[300px] text-center lg:text-left">
                       <h1
                         className="text-md lg:text-3xl font-bold mb-2"
                         style={{ fontFamily: "Space Grotesk, sans-serif" }}
@@ -79,12 +79,12 @@ const SpamScore = () => {
                         getting cancelled by search engines for being spam.
                       </p>
                     </div>
-                    <div className="bg-gray-300 h-71 mt-4 rounded-md flex justify-center items-center">
+                    <div className="bg-gray-300 h-[250px] w[300px] mt-4 rounded-md flex justify-center items-center">
                       <h1 className="text-md lg:text-2xl font-bold">AD</h1>
                     </div>
                     <div className="mt-4"></div>
                   </div>
-                  <div className="bg-gray-300 h-150 p-14 ml-4 rounded-md flex justify-center items-center">
+                  <div className="bg-gray-300 h-[600px] w-[120px] p-14 rounded-md flex justify-center items-center">
                     <h1 className="text-md lg:text-2xl font-bold">AD</h1>
                   </div>
                 </div>

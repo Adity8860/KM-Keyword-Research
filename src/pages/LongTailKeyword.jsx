@@ -21,11 +21,11 @@ const LongTailKeywordPage = () => {
     }
   };
   return (
-    <div className="w-full bg-white grid p-5 rounded-lg">
+    <div className="w-full bg-white p-5 rounded-lg">
       <div className="w-full lg:min-w-[40rem]">
         <BannerAds />
       </div>
-      <div className="w-full max-w-[60rem] mx-auto p-1 mt-2 rounded-lg">
+      <div className="w-full max-w-[895px] mx-auto p-1 mt-2 rounded-lg">
         <div className="w-full lg:min-w-[40rem]">
           <SearchInput onSearch={handleSearch} />
         </div>

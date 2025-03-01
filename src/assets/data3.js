@@ -5,7 +5,7 @@ const keywordData = [
     difficulty: "500k",
     difficultyPercentage: 80,
     difficultyLevel: "high",
-    spamRiskScore:10,
+    spamRiskScore:5,
     spamRiskLevel: "high",
 
     relatedKeywords: [

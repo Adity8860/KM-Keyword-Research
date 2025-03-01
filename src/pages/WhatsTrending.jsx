@@ -24,11 +24,11 @@ const WhatsTrending = () => {
   };
 
   return (
-    <div className="w-full bg-white grid p-5 rounded-lg">
+    <div className="w-full bg-white p-5 rounded-lg">
       <div className="w-full lg:min-w-[40rem]">
         <BannerAds />
       </div>
-      <div className="w-full max-w-[60rem] mx-auto p-1 mt-2 rounded-lg">
+      <div className="w-full max-w-[895px] mx-auto p-1 mt-2 rounded-lg">
         <div className="w-full lg:min-w-[40rem]">
           <SearchInput onSearch={handleSearch} />
         </div>
@@ -77,10 +77,10 @@ const WhatsTrending = () => {
                       </button>
                     </div>
                   </div>
-                  <div className="w-full lg:w-1/2 lg:ml-4 mt-4 lg:mt-0">
-                    <div className="p-8 bg-[#12153D] rounded-lg text-white h-75 text-center lg:text-left">
+                  <div className="pl-4 pr-4 mt-4 lg:mt-0">
+                    <div className="p-8 bg-[#12153D] rounded-lg text-white h-[330px] w-full lg:w-[300px] text-center lg:text-left">
                       <h1
-                        className="text-md lg:text-2xl font-bold mb-2"
+                        className="text-md lg:text-3xl font-bold mb-2"
                         style={{ fontFamily: "Space Grotesk, sans-serif" }}
                       >
                         What is it?
@@ -91,12 +91,12 @@ const WhatsTrending = () => {
                         are gaining interest and which are fading.
                       </p>
                     </div>
-                    <div className="bg-gray-300 h-71 mt-4 rounded-md flex justify-center items-center">
+                    <div className="bg-gray-300 h-[250px] w-full lg:w-[300px] mt-4 rounded-md flex justify-center items-center">
                       <h1 className="text-md lg:text-2xl font-bold">AD</h1>
                     </div>
                     <div className="mt-4"></div>
                   </div>
-                  <div className="bg-gray-300 h-150 p-14 ml-4 rounded-md flex justify-center items-center">
+                  <div className="bg-gray-300 h-[600px] w-full lg:w-[120px] mt-4 lg:mt-0 rounded-md flex justify-center items-center">
                     <h1 className="text-md lg:text-2xl font-bold">AD</h1>
                   </div>
                 </div>
