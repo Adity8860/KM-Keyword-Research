@@ -12,7 +12,7 @@ export const renderSpamRiskCircle = (percentage) => {
         viewBox="0 0 120 120" // added viewBox to ensure proper scaling
       >
         <circle
-          strokeWidth="12"
+          strokeWidth="20" // increased border width
           stroke="#FFC5A6"
           fill="transparent"
           r="50" // adjusted radius
@@ -20,7 +20,7 @@ export const renderSpamRiskCircle = (percentage) => {
           cy="60"
         />
         <circle
-          strokeWidth="12"
+          strokeWidth="20" // increased border width
           strokeDasharray={circumference}
           strokeDashoffset={offset}
           // strokeLinecap="round"
@@ -34,7 +34,7 @@ export const renderSpamRiskCircle = (percentage) => {
       <div className="absolute flex flex-col items-center justify-center">
         {/* <span className="text-gray-500">Conversion</span> */}
         <span className="text-2xl font-bold hidden">{percentage}</span>
-        <p className="text-lg font-semibold p-4">mildly overused</p>
+        <p className="text-md font-bold p-8">mildly overused</p>
       </div>
     </div>
   );
