@@ -15,7 +15,7 @@ const LongTailKeywordPage = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/scraper/scrape?query=${searchTerm}&engine=${searchEngine}`
+        `https://keyword-research3.onrender.com/api/scraper/scrape?query=${searchTerm}&engine=${searchEngine}`
       );
       const data = await response.json();
 

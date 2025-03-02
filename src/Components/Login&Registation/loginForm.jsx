@@ -67,7 +67,7 @@ function LoginPage({ isVisible, onClose }) {
       onClose();
   
       // Redirect to the /keyword-volume page
-      navigate("/keyword-volume", { replace: true });
+      navigate("/related-keywords", { replace: true });
     } catch (error) {
       console.error("Error logging in:", error);
       alert("Login failed. Please check your credentials.");
