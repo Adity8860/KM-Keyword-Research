@@ -9,15 +9,40 @@ const SpamScore = () => {
 
   const { data: data3, loading } = useKeywordData();
 
-  const handleSearch = (searchTerm) => {
+  const handleSearch = async (searchTerm) => {
     console.log("Searching for:", searchTerm);
     const trimmedSearchTerm = searchTerm.trim().toLowerCase();
-    const result = data3.find(
-      (item) => item.keyword.toLowerCase() === trimmedSearchTerm
-    );
-    console.log("Search result:", result);
-    setKeywordData(result);
+  
+    try {
+      const response = await fetch("http://localhost:5000/api/gemini/get-keyword-spam-score", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ keyword: trimmedSearchTerm }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log("API Response:", data);
+  
+      // Extracting the first digit from spam_score
+      const spamScore = data.spam_score ? parseInt(data.spam_score) : 0;
+  
+      // Updating keywordData with the extracted spam score
+      setKeywordData({
+        ...data,
+        spamRiskScore: spamScore, // Overriding spam_score with extracted digit
+      });
+  
+    } catch (error) {
+      console.error("Error fetching keyword data:", error);
+    }
   };
+  
 
   return (
     <div className="w-full bg-white   p-5 rounded-lg">
