@@ -1,25 +1,33 @@
 import React, { useState } from "react";
-import useKeywordData from "../hooks/useKeywordData.js";
 import BannerAds from "../Components/ui/Ads/BannerAds.jsx";
 import SearchInput from "../Components/ui/KeywordInput/SearchInput.jsx";
-import KeywordContainer from "../Components/ui/LongTailKeyword/KeywordContainer.jsx"; // Updated import
+import KeywordContainer from "../Components/ui/LongTailKeyword/KeywordContainer.jsx";
 import SVG1 from "../assets/releatedKI.svg";
 import SearchEngine from "../Components/ui/KeywordInput/SearchEngine.jsx";
 
 export const KeywordResearch = () => {
-  const [keywordData, setKeywordData] = useState(null);
-  const { data: data3, loading } = useKeywordData();
+  const [keywordData, setKeywordData] = useState(null); 
   const [hover, setHover] = useState(false);
+  const [searchEngine, setSearchEngine] = useState("google"); // Default to Bing
+  const [searchLoading, setSearchLoading] = useState(false); // Loader state
 
-  const handleSearch = (searchTerm) => {
-    console.log("Searching for:", searchTerm);
-    const result = data3.find(
-      (item) => item.keyword.toLowerCase() === searchTerm.toLowerCase()
-    );
-    console.log("Search result:", result);
-    setKeywordData(result);
-    if (result) {
-      setSpamData(getSpamRiskData(result.keyword, data3));
+  const handleSearch = async (searchTerm) => {
+    console.log("Searching for:", searchTerm, "Engine:", searchEngine);
+    setSearchLoading(true); // Start loading
+
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/scraper/scrape?query=${searchTerm}&engine=${searchEngine}`
+      );
+      const data = await response.json();
+
+      if (data && data.keywords) {
+        setKeywordData({ keyword: searchTerm, relatedKeywords: data.keywords });
+      }
+    } catch (error) {
+      console.error("Error fetching keyword data:", error);
+    } finally {
+      setSearchLoading(false); // Stop loading
     }
   };
 
@@ -31,25 +39,24 @@ export const KeywordResearch = () => {
       <div className="w-full max-w-[895px] mx-auto p-1 mt-2 rounded-lg">
         <div className="w-full lg:min-w-[40rem]">
           <SearchInput onSearch={handleSearch} />
-          <SearchEngine />
+          <SearchEngine onSelectEngine={setSearchEngine} />
         </div>
         <div>
-          {loading ? (
-            <div className="flex justify-center">
-              <div className="loader">Loading...</div>
+          {searchLoading ? (
+            <div className="flex justify-center mt-4">
+              <div className="loader border-t-4 border-blue-500 border-solid rounded-full w-12 h-12 animate-spin"></div>
             </div>
           ) : (
             keywordData && (
               <>
-                <style>
-                  @import
-                  url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
-                </style>
                 <div className="flex flex-col lg:flex-row w-full mt-4">
                   <div className="w-full lg:w-1/2">
                     <KeywordContainer keywordData={keywordData} />
                   </div>
-                  <div className="mt-0 pr-2" style={{transform: "translateY(-19.5vh)"}}>
+                  <div
+                    className="mt-0 pr-2"
+                    style={{ transform: "translateY(-19.5vh)" }}
+                  >
                     <div
                       onMouseEnter={() => setHover(true)}
                       onMouseLeave={() => setHover(false)}
@@ -80,15 +87,23 @@ export const KeywordResearch = () => {
                     </div>
                     <div className="mt-4"></div>
                   </div>
-                  <div className="bg-gray-300 h-[600px] w-full sm:w-[120px] ml-0 sm:ml-4 rounded-md flex justify-center items-center" style={{transform: "translateY(-19.5vh)"}}>
+                  <div
+                    className="bg-gray-300 h-[600px] w-full sm:w-[120px] ml-0 sm:ml-4 rounded-md flex justify-center items-center"
+                    style={{ transform: "translateY(-19.5vh)" }}
+                  >
                     <h1 className="text-md lg:text-2xl font-bold">AD</h1>
                   </div>
                 </div>
-                <div className="bg-[#12153d] text-white mt-4 p-4 rounded-md text-center lg:text-left" style={{transform: "translateY(-19.5vh)"}}>
+                <div
+                  className="bg-[#12153d] text-white mt-4 p-4 rounded-md text-center lg:text-left"
+                  style={{ transform: "translateY(-19.5vh)" }}
+                >
                   <p className="text-md lg:text-lg">
                     To find more information and get more insights check out{" "}
-                    <a href="#" className="text-[#E5590F]">content ideas</a> to
-                    understand your local and global audience.
+                    <a href="#" className="text-[#E5590F]">
+                      content ideas
+                    </a>{" "}
+                    to understand your local and global audience.
                   </p>
                 </div>
               </>
