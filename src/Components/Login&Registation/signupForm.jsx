@@ -1,18 +1,54 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SignupPage({ onClose }) {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [agree, setAgree] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     setIsOpen(true);
     return () => setIsOpen(false);
   }, []);
 
-  const handleSignup = () => {
-    // Handle sign-up logic here
+  const handleSignup = async () => {
+    if (!name || !email || !password) {
+      alert("Please fill in all fields");
+      return;
+    }
+    if (!agree) {
+      alert("You must agree to the privacy policy");
+      return;
+    }
+
+    const userData = { name, email, password };
+
+    try {
+      const response = await fetch("https://keyword-research3.onrender.com/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Signup successful");
+        navigate("/", { replace: true });
+        handleClose();
+        // You can redirect or reset fields here
+      } else {
+        alert(data.message || "Signup failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred");
+    }
   };
 
   const handleGoogleSignup = () => {
@@ -142,6 +178,15 @@ function SignupPage({ onClose }) {
                 </svg>
                 Apple
               </button>
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700">Enter Name</label>
+              <input
+                type="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full p-2 border border-gray-300 rounded-lg"
+              />
             </div>
             <div className="mb-4">
               <label className="block text-gray-700">Enter Email</label>
