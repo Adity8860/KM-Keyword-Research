@@ -3,6 +3,7 @@ import BannerAds from "../Components/ui/Ads/BannerAds.jsx";
 import SearchInput from "../Components/ui/KeywordInput/SearchInput.jsx";
 import KeywordContainer from "../Components/ui/LongTailKeyword/KeywordContainer.jsx";
 import useKeywordData from "../hooks/useKeywordData";
+import SearchEngine from "../Components/ui/KeywordInput/SearchEngine.jsx";
 
 const LongTailKeywordPage = () => {
   const [keywordData, setKeywordData] = useState(null);
@@ -28,6 +29,7 @@ const LongTailKeywordPage = () => {
       <div className="w-full max-w-[895px] mx-auto p-1 mt-2 rounded-lg">
         <div className="w-full lg:min-w-[40rem]">
           <SearchInput onSearch={handleSearch} />
+          <SearchEngine />
         </div>
         <div>
           {loading ? (
@@ -45,9 +47,12 @@ const LongTailKeywordPage = () => {
                   <div className="w-full lg:w-1/2">
                     <KeywordContainer keywordData={keywordData} />
                   </div>
-                  <div className="w-full lg:w-1/2 lg:ml-4 mt-4 lg:mt-0">
+                  <div className="w-full lg:w-1/2 lg:ml-4 mt-4 lg:mt-0" style={{transform: "translateY(-19.5vh)"}}>
                     <div className="p-8 bg-[#12153D] rounded-lg text-white h-75 text-center lg:text-left">
-                      <h1 className="text-md lg:text-2xl font-bold mb-2"  style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+                      <h1
+                        className="text-md lg:text-2xl font-bold mb-2"
+                        style={{ fontFamily: "Space Grotesk, sans-serif" }}
+                      >
                         What is it?
                       </h1>
                       <p className="text-justify">
@@ -59,13 +64,13 @@ const LongTailKeywordPage = () => {
                     <div className="bg-gray-300 h-71 mt-4 rounded-md flex justify-center items-center">
                       <h1 className="text-md lg:text-2xl font-bold">AD</h1>
                     </div>
-                    <div className="mt-4"></div>
+                    {/* <div className="mt-4"></div> */}
                   </div>
-                  <div className="bg-gray-300 h-150 p-14 ml-4 rounded-md flex justify-center items-center">
+                  <div className="bg-gray-300 h-150 p-14 ml-4 rounded-md flex justify-center items-center " style={{transform: "translateY(-19.5vh)"}}>
                     <h1 className="text-md lg:text-2xl font-bold">AD</h1>
                   </div>
                 </div>
-                <div className="bg-[#12153d] text-white mt-4 p-4 rounded-md text-center lg:text-left">
+                <div className="bg-[#12153d] text-white mt-4 p-4 rounded-md text-center lg:text-left" style={{transform: "translateY(-19.5vh)"}}>
                   <p className="text-md lg:text-lg">
                     To find more information and get more insights check out{" "}
                     <a href="#" className="text-orange-500">

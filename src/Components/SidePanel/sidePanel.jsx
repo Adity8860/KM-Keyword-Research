@@ -55,8 +55,8 @@ const Sidebar = () => {
 
         {[
           { name: "Related Keywords", path: "/related-keywords" },
-          { name: "Content Ideas", path: "/long-tail-keywords" },
-          { name: "Keyword Research", path: "/keyword-research" },
+          { name: "Longtail Keywords", path: "/long-tail-keywords" },
+          { name: "Audience volume", path: "/keyword-research" },
           { name: "Competiton", path: "/keyword-difficulty" },
           { name: "Spam Score", path: "/spam-score" },
           { name: "What’s Trending", path: "/trends"},

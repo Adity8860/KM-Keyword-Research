@@ -4,6 +4,7 @@ import BannerAds from "../Components/ui/Ads/BannerAds.jsx";
 import SearchInput from "../Components/ui/KeywordInput/SearchInput.jsx";
 import KeywordContainer from "../Components/ui/LongTailKeyword/KeywordContainer.jsx"; // Updated import
 import SVG1 from "../assets/releatedKI.svg";
+import SearchEngine from "../Components/ui/KeywordInput/SearchEngine.jsx";
 
 export const KeywordResearch = () => {
   const [keywordData, setKeywordData] = useState(null);
@@ -30,6 +31,7 @@ export const KeywordResearch = () => {
       <div className="w-full max-w-[895px] mx-auto p-1 mt-2 rounded-lg">
         <div className="w-full lg:min-w-[40rem]">
           <SearchInput onSearch={handleSearch} />
+          <SearchEngine />
         </div>
         <div>
           {loading ? (
@@ -47,7 +49,7 @@ export const KeywordResearch = () => {
                   <div className="w-full lg:w-1/2">
                     <KeywordContainer keywordData={keywordData} />
                   </div>
-                  <div className="mt-2">
+                  <div className="mt-0 pr-2" style={{transform: "translateY(-19.5vh)"}}>
                     <div
                       onMouseEnter={() => setHover(true)}
                       onMouseLeave={() => setHover(false)}
@@ -78,11 +80,11 @@ export const KeywordResearch = () => {
                     </div>
                     <div className="mt-4"></div>
                   </div>
-                  <div className="bg-gray-300 h-[600px] w-full sm:w-[120px] ml-0 sm:ml-4 rounded-md flex justify-center items-center">
+                  <div className="bg-gray-300 h-[600px] w-full sm:w-[120px] ml-0 sm:ml-4 rounded-md flex justify-center items-center" style={{transform: "translateY(-19.5vh)"}}>
                     <h1 className="text-md lg:text-2xl font-bold">AD</h1>
                   </div>
                 </div>
-                <div className="bg-[#12153d] text-white mt-4 p-4 rounded-md text-center lg:text-left">
+                <div className="bg-[#12153d] text-white mt-4 p-4 rounded-md text-center lg:text-left" style={{transform: "translateY(-19.5vh)"}}>
                   <p className="text-md lg:text-lg">
                     To find more information and get more insights check out{" "}
                     <a href="#" className="text-[#E5590F]">content ideas</a> to
