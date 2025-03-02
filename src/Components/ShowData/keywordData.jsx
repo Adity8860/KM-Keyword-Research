@@ -19,7 +19,7 @@ const KeywordData = () => {
           query: searchTerm,
           location_code: "in",
           language_code: "en",
-          limit: 200,
+          engine: "google",
         },
       });
   
