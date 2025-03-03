@@ -7,7 +7,7 @@ import KeywordResearch from "./pages/relatedKeyword.jsx";
 import LongTailKeyword from "./pages/LongTailKeyword.jsx";
 import KeywordDifficulty from "./pages/keywordDifficulty.jsx";
 import SpamScore from "./pages/SpamScore.jsx";
-import WhatsTrending from "./pages/whatsTrending.jsx"
+import WhatsTrending from "./pages/Trends.jsx"
 
 import AudienceVolume from "./pages/AudienceVolume.jsx";
 
