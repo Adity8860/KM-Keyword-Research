@@ -42,7 +42,6 @@ const SpamScore = () => {
       console.error("Error fetching keyword data:", error);
     }
   };
-  
 
   return (
     <div className="w-full bg-white   p-5 rounded-lg">
@@ -77,10 +76,13 @@ const SpamScore = () => {
                             {keywordData.spamRiskScore}
                           </p>
                         
-                    
+                          <p className="text-md text-gray-600">
+                            {keywordData.spam_description}
+                          </p>
                         </div>
                         <div>
-                          {renderSpamRiskCircle(keywordData.spamRiskScore * 10)}
+                          {renderSpamRiskCircle(keywordData.spamRiskScore )}
+                          console.log("check",keywordData.spamRiskScore)
                         </div>
                       </div>
                     </div>

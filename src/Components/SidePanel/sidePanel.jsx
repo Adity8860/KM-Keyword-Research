@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom"; // Import useLocation
 import LoginPage from "../Login&Registation/loginForm"; // Import LoginPage
 import { isAuthenticated } from "../../utils/auth"; // Import isAuthenticated
+import Profile from "../../assets/profile.svg"
 
 const Sidebar = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -45,7 +46,7 @@ const Sidebar = () => {
       >
         <div className="flex items-center justify-between mb-4">
           <div className="flex justify-center items-center space-x-5.5">
-            <i className="fas fa-user-circle text-5xl bg-blue-500 rounded-full mb-6"></i>
+            <img src={Profile} alt="" />
             <span className="mb-4 mr-3"> New User</span>
           </div>
           <button onClick={toggleSidebar} className="md:hidden bg-transparent border-none">
@@ -56,7 +57,7 @@ const Sidebar = () => {
         {[
           { name: "Related Keywords", path: "/related-keywords" },
           { name: "Longtail Keywords", path: "/long-tail-keywords" },
-          { name: "Audience volume", path: "/keyword-research" },
+          { name: "Audience volume", path: "/audience-volume" },
           { name: "Competiton", path: "/keyword-difficulty" },
           { name: "Spam Score", path: "/spam-score" },
           { name: "What’s Trending", path: "/trends"},

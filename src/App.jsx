@@ -8,6 +8,8 @@ import LongTailKeyword from "./pages/LongTailKeyword.jsx";
 import KeywordDifficulty from "./pages/keywordDifficulty.jsx";
 import SpamScore from "./pages/SpamScore.jsx";
 import WhatsTrending from "./pages/whatsTrending.jsx";
+import AudienceVolume from "./pages/AudienceVolume.jsx";
+
 
 // PrivateRoute Component
 const PrivateRoute = ({ children }) => {
@@ -29,6 +31,7 @@ const AppContent = () => {
               <Route path="/keyword-difficulty" element={<PrivateRoute><KeywordDifficulty /></PrivateRoute>} />              
               <Route path="/spam-score" element={<PrivateRoute><SpamScore /></PrivateRoute>} />
               <Route path="/trends" element={<PrivateRoute><WhatsTrending /></PrivateRoute>} />
+              <Route path ="/audience-volume" element={<PrivateRoute><AudienceVolume /></PrivateRoute>} />
             </Routes>
           </Layout>
         }

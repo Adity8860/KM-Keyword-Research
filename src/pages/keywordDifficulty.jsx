@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import BannerAds from "../Components/ui/Ads/BannerAds";
 import SearchInput from "../Components/ui/KeywordInput/SearchInput";
 import useKeywordData from "../hooks/useKeywordData";
+import Difficultycircle from "../Components/ui/Graphs/Difficultycircle";
+
 
 const KeywordDifficulty = () => {
   const [keywordData, setKeywordData] = useState(null);
@@ -36,30 +38,30 @@ const KeywordDifficulty = () => {
   };
   
 
-  const renderDifficultyCircle = (percentage) => {
-    const rotation = (percentage / 100) * 360;
-    return (
-      <div className="relative w-55 h-55 mx-auto">
-        {/* Background circle */}
-        <div className="absolute inset-0 rounded-full border-32 border-orange-500 bg-white" />
+  // const renderDifficultyCircle = (percentage) => {
+  //   const rotation = (percentage / 100) * 360;
+  //   return (
+  //     <div className="relative w-55 h-55 mx-auto">
+  //       {/* Background circle */}
+  //       <div className="absolute inset-0 rounded-full border-32 border-orange-500 bg-white" />
   
-        {/* Progress circle with rotation animation */}
-        <div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{
-            transform: `rotate(${rotation}deg) translate(0, -42%)`,
-          }}
-        >
-          <div className="w-1 h-8 bg-black rounded-full" />
-        </div>
+  //       {/* Progress circle with rotation animation */}
+  //       <div
+  //         className="absolute inset-0 flex items-center justify-center"
+  //         style={{
+  //           transform: `rotate(${rotation}deg) translate(0, -42%)`,
+  //         }}
+  //       >
+  //         <div className="w-1 h-8 bg-black rounded-full" />
+  //       </div>
   
-        {/* Center content */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-lg font-medium">{percentage}%</span>
-        </div>
-      </div>
-    );
-  };
+  //       {/* Center content */}
+  //       <div className="absolute inset-0 flex items-center justify-center">
+  //         <span className="text-lg font-medium">{percentage}%</span>
+  //       </div>
+  //     </div>
+  //   );
+  // };
   
   return (
     <div className="w-full bg-white p-5 rounded-lg">
@@ -93,12 +95,17 @@ const KeywordDifficulty = () => {
                           {keywordData.keyword_difficulty}%
                         </p>
                       </div>
-                      {renderDifficultyCircle(keywordData.keyword_difficulty)}
+                      {/* <Difficultycircle /> */}
+                      <Difficultycircle 
+                        percentage={keywordData.keyword_difficulty} 
+                        // description={keywordData.difficulty_description} 
+                      />
                     </div>
                   </div>
-                  <div className="p-4 bg-[#12153D] rounded-lg text-white text-center lg:text-left mt-4">
-                    <h1 className="text-xl">
+                  <div className="p-4  bg-[#12153D] rounded-lg text-white text-center lg:text-left mt-4">
+                    <h1 className="text-xl p-8">
                       {keywordData.difficulty_description}
+                      {/* this is the hardest keyword and has a lot of competition. */}
                     </h1>
                   </div>
                 </div>

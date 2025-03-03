@@ -1,7 +1,7 @@
-export const renderSpamRiskCircle = (percentage) => {
+export const renderSpamRiskCircle = (spamRiskScore, description) => {
   const radius = 50; // adjusted radius
   const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (percentage / 100) * circumference;
+  const offset = circumference - (spamRiskScore / 100) * circumference;
 
   return (
     <div className="relative flex items-center justify-center ">
@@ -33,8 +33,8 @@ export const renderSpamRiskCircle = (percentage) => {
       </svg>
       <div className="absolute flex flex-col items-center justify-center">
         {/* <span className="text-gray-500">Conversion</span> */}
-        <span className="text-2xl font-bold hidden">{percentage}</span>
-        <p className="text-md font-bold p-8">mildly overused</p>
+        <span className="text-2xl font-bold ">{String(spamRiskScore)[0]}</span>
+        <p className="text-md font-bold p-8">{description}</p>
       </div>
     </div>
   );
