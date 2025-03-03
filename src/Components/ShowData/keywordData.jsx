@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import data3 from "../../assets/data3.js";
 import SignupPage from "../Login&Registation/signupForm.jsx";
 import axios from "axios";
 // import { Bar } from 'react-chartjs-2'; // Removed Bar import
@@ -8,9 +7,12 @@ const KeywordData = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [keywordData, setKeywordData] = useState(null);
   const [isSignupVisible, setSignupVisible] = useState(false);
+  const [loading, setLoading] = useState(false); // Loader state
 
   const handleSearch = async () => {
     if (!searchTerm.trim()) return;
+
+    setLoading(true); // Show loader
   
     try {
       // First API call: Scraping keyword data
@@ -35,6 +37,8 @@ const KeywordData = () => {
         volume: volumeDifficultyResponse.data.analysisResult.keywordVolume,  // Ensure correct field names here
         difficulty: volumeDifficultyResponse.data.analysisResult.keywordDifficulty, // Ensure correct field names
       });
+
+      setLoading(false); // Hide loader
     } catch (error) {
       console.error("Error fetching data:", error);
       setKeywordData(null);
@@ -120,6 +124,16 @@ const KeywordData = () => {
                 />
               </svg>
             </div>
+
+
+          {/* Loader */}
+          {loading && (
+            <div className="flex justify-center items-center mt-4">
+              <div className="loader border-4 border-t-4 border-orange-200 rounded-full w-10 h-10 animate-spin"></div>
+            </div>
+          )}
+
+
             <div className="w-full max-w-[65rem] mx-auto p-1 mt-2 rounded-lg flex flex-col sm:flex-row items-center">
               {keywordData && (
                 <div className="flex flex-col sm:flex-row w-full h-full">
