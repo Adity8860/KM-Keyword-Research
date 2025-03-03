@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import LoginPage from "../Login&Registation/loginForm";
+import { isAuthenticated } from "../../utils/auth"; // Import isAuthenticated
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,19 +18,12 @@ const Navbar = () => {
     setIsLoginVisible(false);
   };
 
-  useEffect(() => {
-    console.log("isLoginVisible:", isLoginVisible);
-  }, [isLoginVisible]);
+  // useEffect(() => {
+  //   console.log("isLoginVisible:", isLoginVisible);
+  // }, [isLoginVisible]);
 
-  useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (!token) {
-      setIsLoginVisible(true); // Show login if no JWT found
-    }
-  }, []);
 
   return (
-    
     <>
       <style>
         @import

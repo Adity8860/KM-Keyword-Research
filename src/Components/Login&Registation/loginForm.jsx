@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import SignupPage from "./signupForm";
 import { useNavigate } from "react-router-dom"; // To navigate to /keyword-volume after login
 import axios from "axios"; // Axios for HTTP requests
+import { isAuthenticated } from "../../utils/auth"; // Import the isAuthenticated function
 
 function LoginPage({ isVisible, onClose }) {
   const modalRef = useRef(null);
@@ -32,7 +33,6 @@ function LoginPage({ isVisible, onClose }) {
       setTimeout(onClose, 300);
     }, 0);
   };
-
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -67,13 +67,12 @@ function LoginPage({ isVisible, onClose }) {
       onClose();
   
       // Redirect to the /keyword-volume page
-      navigate("/keyword-volume");
+      navigate("/related-keywords", { replace: true });
     } catch (error) {
       console.error("Error logging in:", error);
       alert("Login failed. Please check your credentials.");
     }
   };
-  
 
   if (!isVisible) return null;
 
@@ -91,12 +90,12 @@ function LoginPage({ isVisible, onClose }) {
           className="bg-white rounded-lg shadow-lg w-full max-w-2xl p-4 sm:w-[60%] relative"
           style={{ transform, transition: "transform 0.3s ease-in-out" }}
         >
-          {/* <button
+          <button
             onClick={handleClose}
             className="absolute top-2 right-2 text-gray-500"
           >
             &times;
-          </button> */}
+          </button>
           <h1
             className="text-2xl font-extrabold p-4 pl-9 text-center sm:text-left"
             style={{ wordSpacing: "7px" }}
