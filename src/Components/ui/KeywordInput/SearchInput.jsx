@@ -20,7 +20,7 @@ const SearchInput = ({ onSearch }) => {
           onChange={(e) => setSearchTerm(e.target.value)}
           style={{ padding: "8px", width: "100%" }}
         />
-       <div><i className="fa-solid fa-magnifying-glass"></i></div>
+       <div><i className="fa-solid fa-magnifying-glass cursor-pointer" onClick={handleSearch}></i></div>
       </div>
     </div>
   );
