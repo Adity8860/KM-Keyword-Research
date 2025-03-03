@@ -1,14 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom"; // Import useLocation
-import LoginPage from "../Login&Registation/loginForm"; // Import LoginPage
-import { isAuthenticated } from "../../utils/auth"; // Import isAuthenticated
+import { Link, useLocation } from "react-router-dom"; 
+import LoginPage from "../Login&Registation/loginForm";
+import { isAuthenticated } from "../../utils/auth";
 import Profile from "../../assets/profile.svg"
 
 const Sidebar = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLoginVisible, setIsLoginVisible] = useState(false);
-  const location = useLocation(); // Get the current location
+  const [username, setUsername] = useState("Guest User"); // Default value
+  const location = useLocation();
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+
+    if (!isAuthenticated() && location.pathname !== "/") {
+      setIsLoginVisible(true);
+    }
+  }, [location.pathname]);
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
@@ -18,12 +30,6 @@ const Sidebar = () => {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-
-  useEffect(() => {
-    if (!isAuthenticated() && location.pathname !== "/") {
-      setIsLoginVisible(true); 
-    }
-  }, [location.pathname]);
 
   const hideLogin = () => {
     setIsLoginVisible(false);
@@ -46,7 +52,7 @@ const Sidebar = () => {
       >
         <div className="flex items-center justify-between mb-4">
           <div className="flex justify-center items-center space-x-5.5">
-            <img src={Profile} alt="" />
+            <i className="fas fa-user-circle text-5xl bg-blue-500 rounded-full mb-6"></i>
             <span className="mb-4 mr-3"> New User</span>
           </div>
           <button onClick={toggleSidebar} className="md:hidden bg-transparent border-none">
@@ -62,7 +68,7 @@ const Sidebar = () => {
           { name: "Spam Score", path: "/spam-score" },
           { name: "What’s Trending", path: "/trends"},
           { name: "SEO Difficulty", path: "/seo-difficulty" },
-        ]. map((option) => (
+        ].map((option) => (
           <Link to={option.path} key={option.name}>
             <div
               className={`mb-4 p-3 cursor-pointer rounded ${
