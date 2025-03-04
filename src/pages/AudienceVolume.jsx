@@ -3,12 +3,20 @@ import useKeywordData from "../hooks/useKeywordData.js";
 import BannerAds from "../Components/ui/Ads/BannerAds.jsx";
 import SearchInput from "../Components/ui/KeywordInput/SearchInput.jsx";
 import AV from "../assets/AV.svg";
-import CountrySelect from "../Components/ui/KeywordInput/CountrySelect.jsx";
+import GoogleIcon from "../assets/googleIcon.svg";
+import CountrySelect from "../Components/ui/KeywordInput/CountrySelect.jsx"; // Import CountrySelect component
+import ServerSelect from "../Components/ui/KeywordInput/ServerSelect.jsx"; // Import ServerSelect component
 
 export const AudienceVolume = () => {
   const [keywordData, setKeywordData] = useState(null);
   const { data: data3, loading } = useKeywordData();
   const [hover, setHover] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState(" "); // Add state for selected country
+  const [selectedServer, setSelectedServer] = useState({ name: "Google", icon: GoogleIcon }); // Add state for selected server
+
+  // const handleCountryClick = (countryCode) => {
+  //   setSelectedCountry({ code: countryCode, flag: countryFlags[countryCode] });
+  // };
 
   const handleSearch = (searchTerm) => {
     console.log("Searching for:", searchTerm);
@@ -22,17 +30,24 @@ export const AudienceVolume = () => {
     }
   };
 
+  const handleCountryChange = (country) => {
+    setSelectedCountry(country);
+  };
+
+  const handleServerChange = (server) => {
+    setSelectedServer(server);
+  };
+
   return (
     <div className="w-full bg-white p-5 rounded-lg">
       <div className="w-full lg:min-w-[40rem]">
         <BannerAds />
       </div>
-      <div className="w-full max-w-[895px] mx-auto p-1 mt-2 rounded-lg">
+      <div className="w-full max-w-[895px] mx-auto  mt-2 rounded-lg">
         <div className="flex  items-center   lg:min-w-[40rem]">
-          <SearchInput onSearch={handleSearch} />
-          <CountrySelect />
-         
+          <SearchInput onSearch={handleSearch} onCountryChange={handleCountryChange} onServerChange={handleServerChange} /> {/* Pass handleServerChange */}
         </div>
+        {/* <CountrySelect onCountryChange={handleCountryChange} /> Add CountrySelect component */}
         <div>
           {loading ? (
             <div className="flex justify-center">
@@ -47,19 +62,28 @@ export const AudienceVolume = () => {
                 </style>
                 <div className="flex flex-col lg:flex-row w-full mt-4">
                   <div className="w-full lg:w-1/2 pr-4">
-                    <div className="flex flex-col items-center justify-center rounded-lg border-1 border-gray-500 p-8">
+                    <div className="flex flex-col items-center justify-center rounded-lg border-1 border-gray-500 w-[435px] h-[328px]">
                       <h1 className="text-2xl text-[#12153d] font-bold">
                         Audience Volume
                       </h1>
-                      <div className="flex items-center justify-center mt-2 mb-4">
-                        <p className="text-4xl text-[#12153d] font-bold font-sans">
+                      <div className="flex flex-col items-center justify-center mt-2 mb-4">
+                        <p className="text-5xl text-[#12153d] font-bold font-sans">
                           135k
                         </p>
-                        <img
-                        className="w-12 h-8 ml-4"
-                          src="https://s3-alpha-sig.figma.com/img/9452/5f21/18c3b54cc189ab8fb5154c322a47a361?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=NrppVflQpNZpjXkwf9-ganuKUxkkQu3EAhmFhCLlPrZODIqfMyyp8HR3jmdi1h0aZdV4lgdSN0QOdDAx5bDJesdLzfSzw193ZYkIT1VmzXPSsk2EFC~gxW56TmmJV0efq8yP4FTVm-4lFRniZplwGWVQWjHgpCbYeCijTGTPOR8Unc~PI3Na6zWcTisToTzAoJoU4qaR7xwKn9eSe3l-HmPdMTS2lx~zLjOdcauWtgJKACTCssJKl4kYpwYLXbmhLl05t0CQhfW6kek26pMFVkgIiw8cbo1ACVuu0P04WPwjVQzakOgNw6fbiWz2iqnqBF405~KSrXezWo3uJpLksA__"
-                          alt=""
-                        />
+                        <div className="flex items-center justify-center mt-4">
+                          {selectedCountry && (
+                            <img
+                              className="w-12 h-8 ml-4 cursor-pointer"
+                              src={selectedCountry.flag}
+                              alt={`${selectedCountry.name} Flag`}
+                            />
+                          )}
+                          <img
+                            className="w-12 h-8 ml-4"
+                            src={selectedServer.icon} // Update icon based on selected server
+                            alt={`${selectedServer.name} Icon`}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>

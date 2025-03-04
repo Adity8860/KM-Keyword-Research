@@ -48,7 +48,7 @@ const SpamScore = () => {
       <div className="w-full lg:min-w-[40rem]">
         <BannerAds />
       </div>
-      <div className="w-full max-w-[895px] mx-auto p-1 mt-2 rounded-lg">
+      <div className="w-full max-w-[895px] mx-auto  mt-2 rounded-lg">
         <div className="w-full lg:min-w-[40rem]">
           <SearchInput onSearch={handleSearch} />
         </div>

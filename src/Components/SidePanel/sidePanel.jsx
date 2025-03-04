@@ -76,11 +76,11 @@ const Sidebar = () => {
 
         {[
           { name: "Related Keywords", path: "/related-keywords" },
-          { name: "Longtail Keywords", path: "/long-tail-keywords" },
-          { name: "Audience volume", path: "/audience-volume" },
-          { name: "Competiton", path: "/keyword-difficulty" },
-          { name: "Spam Score", path: "/spam-score" },
-          { name: "What's Trending", path: "/trends" },
+          { name: "Long-Tail Keywords", path: "/long-tail-keywords" },
+          { name: "Search Volume", path: "/search-volume" },
+          { name: "Keyword Difficulty", path: "/keyword-difficulty" },
+          { name: "Ad Competition", path: "/ad-competition" },
+          { name: "Keyword Trend", path: "/keyword-trend" },
           // { name: "SEO Difficulty", path: "/seo-difficulty" },
         ].map((option) => (
           <Link to={option.path} key={option.name}>

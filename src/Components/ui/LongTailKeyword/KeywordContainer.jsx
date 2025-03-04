@@ -20,18 +20,18 @@ const KeywordContainer = ({ keywordData }) => {
             </select>
           </div> */}
           <div
-            className="w-full h-full sm:h-auto border-1 border-gray-500 p-3 sm:p-4 rounded-lg"
+            className="w-full h-full sm:h-[20rem] lg:h-auto border-1 border-gray-500 p-3 sm:p-4 rounded-lg"
             id="longTail"
           >
             <div className="p-2 sm:p-4 shadow-lg rounded-lg">
               <h1 className="text-base sm:text-lg font-bold">
-                {keywordData.relatedKeywordsCount} result for{" "}
+                {keywordData.relatedKeywordsCount} Result for{" "}
                 {keywordData.keyword}
               </h1>
             </div>
-            <ol className="p-2 sm:p-4 max-h-91.5 overflow-y-auto">
+            <ol className="p-2 sm:p-4 max-h-126.5 overflow-y-auto">
               {keywordData.relatedKeywords.map((item, index) => (
-                <li key={index} className=" p-1.5 text-xs font-sans sm:text-sm md:text-base">
+                <li key={index} className="p-1.5 text-xs sm:text-sm md:text-base">
                   {item}
                 </li>
               ))}
