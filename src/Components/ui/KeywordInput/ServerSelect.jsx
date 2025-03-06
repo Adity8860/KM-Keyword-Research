@@ -3,9 +3,13 @@ import GoogleIcon from "../../../assets/googleIcon.svg";
 import Bing from "../../../assets/Bing.svg"
 
 const ServerSelect = ({ onServerChange }) => { // Accept onServerChange callback
-  const [selectedServer, setSelectedServer] = useState("Google");
+  const [selectedServer, setSelectedServer] = useState("Select");
 
   const servers = [
+    {
+      name: "Select",
+      icon: null,
+    },
     {
       name: "Google",
       icon: GoogleIcon,
@@ -33,7 +37,7 @@ const ServerSelect = ({ onServerChange }) => { // Accept onServerChange callback
           backgroundColor: "#E5590F",
           textAlign: "center",
           backgroundImage: "none",
-          width: "182px",
+          width: "160px",
         }}
       >
         {servers.map((server) => (

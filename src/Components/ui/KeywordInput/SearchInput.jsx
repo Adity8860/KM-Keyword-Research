@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import useKeywordData from "../../../hooks/useKeywordData";
 import CountrySelect from "./CountrySelect";
 import ServerSelect from "./ServerSelect";
 
 const SearchInput = ({ onSearch, onCountryChange, onServerChange }) => {
   const { searchTerm, setSearchTerm } = useKeywordData();
+  const [country, setCountry] = useState("");
+  const [server, setServer] = useState("");
 
   const handleSearch = () => {
+    if (!country || !server) {
+      alert("Country and Server are required");
+      return;
+    }
     console.log("Searching for:", searchTerm);
     onSearch(searchTerm);
+  };
+
+  const handleCountryChange = (selectedCountry) => {
+    setCountry(selectedCountry);
+    onCountryChange(selectedCountry);
+  };
+
+  const handleServerChange = (selectedServer) => {
+    setServer(selectedServer);
+    onServerChange(selectedServer);
   };
 
   return (
@@ -28,9 +44,9 @@ const SearchInput = ({ onSearch, onCountryChange, onServerChange }) => {
           ></i>
         </div>
       </div>
-      <div className="w-full lg:w-1/2 flex flex-col justify-center sm:flex-row border border-gray-400 p-1 rounded-xl space-y-14 sm:space-y-0 sm:space-x-4" id="two">
-        <CountrySelect onCountryChange={onCountryChange} />
-        <ServerSelect onServerChange={onServerChange} />
+      <div className="w-full lg:w-1/2 flex flex-col justify-center sm:flex-row border border-gray-400 p-1 rounded-xl space-y-14 sm:space-y-0 sm:space-x-14" id="two">
+        <CountrySelect onCountryChange={handleCountryChange} />
+        <ServerSelect onServerChange={handleServerChange} />
       </div>
     </div>
   );

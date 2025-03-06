@@ -9,6 +9,8 @@ import KeywordDifficulty from "./pages/keywordDifficulty.jsx";
 import SpamScore from "./pages/SpamScore.jsx";
 import WhatsTrending from "./pages/WhatsTrending.jsx";
 import AudienceVolume from "./pages/AudienceVolume.jsx";
+import CPCPage from "./pages/CPCPage.jsx";
+import AdCompetition from "./pages/AdCompetition.jsx";
 
 
 // PrivateRoute Component
@@ -29,9 +31,11 @@ const AppContent = () => {
               <Route path="/related-keywords" element={<PrivateRoute><KeywordResearch /></PrivateRoute>} />
               <Route path="/long-tail-keywords" element={<PrivateRoute><LongTailKeyword /></PrivateRoute>} />             
               <Route path="/keyword-difficulty" element={<PrivateRoute><KeywordDifficulty /></PrivateRoute>} />              
-              <Route path="/ad-competition" element={<PrivateRoute><SpamScore /></PrivateRoute>} />
+              <Route path="/Keyword-spam-score" element={<PrivateRoute><SpamScore /></PrivateRoute>} />
               <Route path="/keyword-trend" element={<PrivateRoute><WhatsTrending /></PrivateRoute>} />
               <Route path ="/search-volume" element={<PrivateRoute><AudienceVolume /></PrivateRoute>} />
+              <Route path="/CPC" element={<PrivateRoute><CPCPage /></PrivateRoute>} />
+              <Route path="/ad-competition" element={<PrivateRoute><AdCompetition /></PrivateRoute>} />
             </Routes>
           </Layout>
         }

@@ -74,7 +74,7 @@ const KeywordData = () => {
         ) : (
           <>
              <div
-        className="grid bg-[url('/src/assets/bgimage.png')] bg-cover bg-center p-4 rounded-lg text-white mx-auto w-full max-w-full"
+        className="grid bg-[url('/src/assets/bgimage.png')] bg-cover bg-center p-4 rounded-lg text-white mx-auto w-[895px] h-[320px] max-w-full"
         style={{ fontFamily: "Space Grotesk, sans-serif" }}
       >
         <div className="p-4 lg:p-10 sm:pl-4  md:pl-10">

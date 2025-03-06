@@ -3,7 +3,7 @@ import BannerAds from "../Components/ui/Ads/BannerAds.jsx";
 import SearchInput from "../Components/ui/KeywordInput/SearchInput.jsx";
 import KeywordContainer from "../Components/ui/LongTailKeyword/KeywordContainer.jsx";
 import SVG1 from "../assets/releatedKI.svg";
-// import SearchEngine from "../Components/ui/KeywordInput/SearchEngine.jsx";
+import Loader from "../Components/Loading/Loader.jsx";
 
 export const KeywordResearch = () => {
   const [keywordData, setKeywordData] = useState(null); 
@@ -44,7 +44,7 @@ export const KeywordResearch = () => {
         <div>
           {searchLoading ? (
             <div className="flex justify-center mt-4">
-              <div className="loader border-t-4 border-blue-500 border-solid rounded-full w-12 h-12 animate-spin"></div>
+              <Loader />
             </div>
           ) : (
             keywordData && (

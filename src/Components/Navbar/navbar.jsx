@@ -5,6 +5,11 @@ import { isAuthenticated } from "../../utils/auth"; // Import isAuthenticated
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoginVisible, setIsLoginVisible] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false); // State to track authentication
+
+  useEffect(() => {
+    setLoggedIn(isAuthenticated()); // Check if user is authenticated on component mount
+  }, []);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -18,10 +23,14 @@ const Navbar = () => {
     setIsLoginVisible(false);
   };
 
+  const handleLogout = () => {
+    // Logic to handle logout
+    setLoggedIn(false);
+  };
+
   // useEffect(() => {
   //   console.log("isLoginVisible:", isLoginVisible);
   // }, [isLoginVisible]);
-
 
   return (
     <>
@@ -69,29 +78,50 @@ const Navbar = () => {
                 <a href="#">Forum</a>
               </li>
               <li className="md:px-4 md:py-2 hover:text-gray-400">
-                <a href="#">Contact</a>
+                <a href="#">Course</a>
               </li>
             </ul>
           </div>
-          <div className="order-2 md:order-3 ">
-            <button
-              onClick={showLogin}
-              className="px-4 py-2 bg-orange-400 hover:bg-orange-500 text-gray-50 rounded-xl flex items-center gap-2"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
+          <div className="order-2 md:order-3  ">
+            {loggedIn ? (
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 hover:bg-[#12153D] bg-[#12153de8] text-gray-50 rounded-xl flex items-center gap-2 cursor-pointer"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span>Login</span>
-            </button>
+                {/* <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg> */}
+                <span>Logout</span>
+              </button>
+            ) : (
+              <button
+                onClick={showLogin}
+                className="px-4 py-2 bg-orange-400 hover:bg-orange-500 text-gray-50 rounded-xl flex items-center gap-2 cursor-pointer"
+              >
+                {/* <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg> */}
+                <span>Login</span>
+              </button>
+            )}
           </div>
         </div>
       </nav>

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import BannerAds from "../Components/ui/Ads/BannerAds.jsx";
 import SearchInput from "../Components/ui/KeywordInput/SearchInput.jsx";
 import useKeywordData from "../hooks/useKeywordData.js";
+import Loader from "../Components/Loading/Loader.jsx";
+
 import Bargraph, {
   dataWeek,
   dataMonth,
@@ -35,7 +37,7 @@ const WhatsTrending = () => {
         <div>
           {loading ? (
             <div className="flex justify-center">
-              <div className="loader">Loading...</div>
+          <Loader />
             </div>
           ) : (
             keywordData && (

@@ -5,8 +5,9 @@ const keywordData = [
     difficulty: "500k",
     difficultyPercentage: 80,
     difficultyLevel: "high",
-    spamRiskScore:5,
+    spamRiskScore: 5,
     spamRiskLevel: "high",
+    cpc: 1.2, // Added CPC data
 
     relatedKeywords: [
       "apple iphone",
@@ -82,6 +83,8 @@ const keywordData = [
     spamRisk: 70,
     spamRiskScore: 7,
     spamRiskLevel: "medium",
+    cpc: 0.8, // Added CPC data
+
     relatedKeywords: [
       "banana bread",
       "banana smoothie",
@@ -156,6 +159,8 @@ const keywordData = [
     spamRisk: 75,
     spamRiskScore: 71,
     spamRiskLevel: "medium",
+    cpc: 1.0, // Added CPC data
+
     relatedKeywords: [
       "orange juice",
       "orange fruit",
@@ -230,6 +235,8 @@ const keywordData = [
     spamRisk: 65,
     spamRiskScore: 6.5,
     spamRiskLevel: "medium",
+    cpc: 0.5, // Added CPC data
+
     relatedKeywords: [
       "grape juice",
       "grape fruit",
@@ -304,6 +311,8 @@ const keywordData = [
     spamRisk: 10,
     spamRiskScore: 1,
     spamRiskLevel: "low",
+    cpc: 1.5, // Added CPC data
+
     relatedKeywords: [
       "strawberry shortcake",
       "strawberry smoothie",

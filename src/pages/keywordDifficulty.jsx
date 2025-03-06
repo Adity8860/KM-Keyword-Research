@@ -3,6 +3,7 @@ import BannerAds from "../Components/ui/Ads/BannerAds";
 import SearchInput from "../Components/ui/KeywordInput/SearchInput";
 import useKeywordData from "../hooks/useKeywordData";
 import Difficultycircle from "../Components/ui/Graphs/Difficultycircle";
+import Loader from "../Components/Loading/Loader";
 
 
 const KeywordDifficulty = () => {
@@ -75,7 +76,7 @@ const KeywordDifficulty = () => {
         <div>
           {loading ? (
             <div className="flex justify-center">
-              <div className="loader">Loading...</div>
+              <Loader />
             </div>
           ) : keywordData ? (
             <>

@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import BannerAds from "../Components/ui/Ads/BannerAds.jsx";
 import SearchInput from "../Components/ui/KeywordInput/SearchInput.jsx";
 import KeywordContainer from "../Components/ui/LongTailKeyword/KeywordContainer.jsx";
-// import SearchEngine from "../Components/ui/KeywordInput/SearchEngine.jsx";
+import Loader from "../Components/Loading/Loader.jsx";
+ 
 
 const LongTailKeywordPage = () => {
   const [keywordData, setKeywordData] = useState(null);
-  // const [searchEngine, setSearchEngine] = useState("google"); // Default to Google
+  const [searchEngine, setSearchEngine] = useState("google"); // Default to Google
   const [loading, setLoading] = useState(false); // Loader state
 
   const handleSearch = async (searchTerm) => {
@@ -45,12 +46,13 @@ const LongTailKeywordPage = () => {
       <div className="w-full max-w-[895px] mx-auto mt-2 rounded-lg">
         <div className="w-full lg:min-w-[40rem]">
           <SearchInput onSearch={handleSearch} />
-          {/* <SearchEngine onSelectEngine={setSearchEngine} /> */}
+          
         </div>
         <div>
           {loading ? (
             <div className="flex justify-center mt-4">
-              <div className="loader border-t-4 border-blue-500 border-solid rounded-full w-12 h-12 animate-spin"></div>
+              {/* <div className="loader border-t-4 border-blue-500 border-solid rounded-full w-12 h-12 animate-spin"></div> */}
+              <Loader />
             </div>
           ) : (
             keywordData && (

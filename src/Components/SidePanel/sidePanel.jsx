@@ -75,13 +75,15 @@ const Sidebar = () => {
         </div>
 
         {[
+          { name: "Home", path: "/" },
           { name: "Related Keywords", path: "/related-keywords" },
           { name: "Long-Tail Keywords", path: "/long-tail-keywords" },
           { name: "Search Volume", path: "/search-volume" },
           { name: "Keyword Difficulty", path: "/keyword-difficulty" },
-          { name: "Ad Competition", path: "/ad-competition" },
+          { name: "Keyword Spam Score", path: "/Keyword-spam-score" },
           { name: "Keyword Trend", path: "/keyword-trend" },
-          // { name: "SEO Difficulty", path: "/seo-difficulty" },
+          { name: "CPC (Cost Per Click)", path: "/CPC" },
+          {name:"Ad Competitions",path:"/ad-Competition"}
         ].map((option) => (
           <Link to={option.path} key={option.name}>
             <div
