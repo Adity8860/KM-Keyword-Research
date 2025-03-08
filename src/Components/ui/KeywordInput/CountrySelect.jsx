@@ -10,7 +10,7 @@ const CountrySelect = ({ onCountryChange }) => {
   const [selectedCountry, setSelectedCountry] = useState("Select");
 
   const countries = [
-    { name: "Select", flag: "" },
+    { name: "Select Country", flag: "" },
     { name: "United States", flag: US },
     { name: "India", flag: India },
     { name: "UK", flag: UK },

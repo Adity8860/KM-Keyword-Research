@@ -104,19 +104,19 @@ const WhatsTrending = () => {
                         onClick={() => setGraphData(dataWeek)}
                         className="p-2 font-bold text-md bg-white rounded-full pr-15 pl-15 hover:bg-[#E5590F] hover:text-white"
                       >
-                        last Week
+                        last 8 Month
                       </button>
                       <button
                         onClick={() => setGraphData(dataMonth)}
                         className="p-2 font-bold text-md bg-white rounded-full pr-15 pl-15 hover:bg-[#E5590F] hover:text-white"
                       >
-                        last Month
+                        last 10 Month
                       </button>
                       <button
                         onClick={() => setGraphData(dataYear)}
                         className="p-2 font-bold text-md bg-white rounded-full pr-15 pl-15 hover:bg-[#E5590F] hover:text-white"
                       >
-                        last Year
+                        last 12 Month
                       </button>
                     </div>
                   </div>

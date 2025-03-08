@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import useKeywordData from "../../../hooks/useKeywordData";
 import CountrySelect from "./CountrySelect";
 import ServerSelect from "./ServerSelect";
+import SelectCurrency from "./SelectCurrency";
 
 const SearchInput = ({ onSearch, onCountryChange, onServerChange }) => {
   const { searchTerm, setSearchTerm } = useKeywordData();
   const [country, setCountry] = useState("");
   const [server, setServer] = useState("");
+  const location = useLocation();
 
   const handleSearch = () => {
-    if (!country || !server) {
+    if (!country || (!server && location.pathname !== "/CPC")) {
       alert("Country and Server are required");
       return;
     }
@@ -46,7 +49,11 @@ const SearchInput = ({ onSearch, onCountryChange, onServerChange }) => {
       </div>
       <div className="w-full lg:w-1/2 flex flex-col justify-center sm:flex-row border border-gray-400 p-1 rounded-xl space-y-14 sm:space-y-0 sm:space-x-14" id="two">
         <CountrySelect onCountryChange={handleCountryChange} />
-        <ServerSelect onServerChange={handleServerChange} />
+        {location.pathname === "/CPC" ? (
+          <SelectCurrency />
+        ) : (
+          <ServerSelect onServerChange={handleServerChange} />
+        )}
       </div>
     </div>
   );
