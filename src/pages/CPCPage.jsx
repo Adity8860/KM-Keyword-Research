@@ -10,15 +10,8 @@ export const CPCPage = () => {
   const { data: data3, loading } = useKeywordData();
   const [hover, setHover] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(" "); // Add state for selected country
-  const [selectedServer, setSelectedServer] = useState({
-    name: "Google",
-    icon: GoogleIcon,
-  }); // Add state for selected server
-
-  // const handleCountryClick = (countryCode) => {
-  //   setSelectedCountry({ code: countryCode, flag: countryFlags[countryCode] });
-  // };
-
+  
+  
   const handleSearch = (searchTerm) => {
     console.log("Searching for:", searchTerm);
     const result = data3.find(
@@ -31,13 +24,6 @@ export const CPCPage = () => {
     }
   };
 
-  // const handleCountryChange = (country) => {
-  //   setSelectedCountry(country);
-  // };
-
-  // const handleServerChange = (server) => {
-  //   setSelectedServer(server);
-  // };
 
   return (
     <div className="w-full bg-white p-5 rounded-lg">
