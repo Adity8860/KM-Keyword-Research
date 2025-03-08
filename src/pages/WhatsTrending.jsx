@@ -16,14 +16,55 @@ const WhatsTrending = () => {
 
   const { data: data3, loading } = useKeywordData();
 
-  const handleSearch = (searchTerm) => {
-    console.log("Searching for:", searchTerm);
-    const result = data3.find(
-      (item) => item.keyword.toLowerCase() === searchTerm.toLowerCase()
-    );
-    console.log("Search result:", result);
-    setKeywordData(result);
+ const handleSearch = async (searchTerm) => {
+  console.log("Searching for:", searchTerm);
+
+  const requestBody = {
+    keywords: [searchTerm],
+    country: selectedCountry,
+    currency: "USD",
   };
+
+  try {
+    const response = await fetch("http://localhost:5000/api/keywords/keyword-Everywhere-Volume", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log("API Response:", result);
+
+    if (result.data && result.data.length > 0) {
+      const keywordInfo = result.data[0]; // Extract the first keyword data
+
+      const formattedData = {
+        keyword: keywordInfo.keyword,
+        competition: keywordInfo.competition,
+        cpc: keywordInfo.cpc.value, // Extract CPC value
+        currency: keywordInfo.cpc.currency, // Extract currency
+        volume: keywordInfo.vol, // Search volume
+        trend: keywordInfo.trend, // Monthly trend data
+        credits: result.credits, // Remaining credits
+      };
+
+      console.log("Formatted Data:", formattedData);
+      setKeywordData(formattedData); // Store structured data in state
+    } else {
+      console.warn("No keyword data found.");
+      setKeywordData(null);
+    }
+  } catch (error) {
+    console.error("Error fetching keyword data:", error);
+  }
+};
+
 
   return (
     <div className="w-full bg-white p-5 rounded-lg">
