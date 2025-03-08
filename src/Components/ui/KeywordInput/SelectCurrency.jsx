@@ -1,6 +1,6 @@
 import React, { useState } from "react";
- 
-const  SelectCurrency = ({ onCountryChange }) => {
+
+const SelectCurrency = ({ onCountryChange = () => {} }) => {
   const [selectedCurrency, setSelectedCurrency] = useState("Select");
 
   const currencies = [
@@ -140,10 +140,12 @@ const  SelectCurrency = ({ onCountryChange }) => {
 
   const handleChange = (event) => {
     const currency = currencies.find(
-      (currency) => `${currency.name} (${currency.symbol})` === event.target.value
+      (currency) => currency.symbol === event.target.value
     );
-    setSelectedCurrency(`${currency.name} (${currency.symbol})`);
-    onCountryChange(currency);
+    if (currency) {
+      setSelectedCurrency(currency.symbol);
+      onCountryChange(currency);
+    }
   };
 
   return (
@@ -163,7 +165,7 @@ const  SelectCurrency = ({ onCountryChange }) => {
         {currencies.map((currency) => (
           <option
             className="rounded-lg text-gray-500 font-light bg-white text-center text-sm"
-            key={currency.symbol}
+            key={`${currency.name}-${currency.symbol}`}
             value={`${currency.symbol}`}
           >
             {currency.symbol}

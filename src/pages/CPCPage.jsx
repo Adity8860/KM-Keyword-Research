@@ -3,7 +3,7 @@ import useKeywordData from "../hooks/useKeywordData.js";
 import BannerAds from "../Components/ui/Ads/BannerAds.jsx";
 import SearchInput from "../Components/ui/KeywordInput/SearchInput.jsx";
 import Loader from "../Components/Loading/Loader.jsx";
-import GoogleIcon from "../assets/googleIcon.svg";
+ 
 
 export const CPCPage = () => {
   const [keywordData, setKeywordData] = useState(null);
@@ -19,9 +19,9 @@ export const CPCPage = () => {
     );
     console.log("Search result:", result);
     setKeywordData(result);
-    if (result) {
-      setSpamData(getSpamRiskData(result.keyword, data3));
-    }
+    // if (result) {
+    //   setSpamData(getSpamRiskData(result.keyword, data3));
+    // }
   };
 
 

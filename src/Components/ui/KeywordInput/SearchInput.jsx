@@ -5,7 +5,7 @@ import CountrySelect from "./CountrySelect";
 import ServerSelect from "./ServerSelect";
 import SelectCurrency from "./SelectCurrency";
 
-const SearchInput = ({ onSearch, onCountryChange, onServerChange }) => {
+const SearchInput = ({ onSearch, onCountryChange = () => {}, onServerChange = () => {} }) => {
   const { searchTerm, setSearchTerm } = useKeywordData();
   const [country, setCountry] = useState("");
   const [server, setServer] = useState("");
