@@ -10,11 +10,7 @@ export const CPCPage = () => {
   const { data: data3, loading } = useKeywordData();
   const [hover, setHover] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(" "); // Add state for selected country
-  const [selectedServer, setSelectedServer] = useState({
-    name: "Google",
-    icon: GoogleIcon,
-  }); // Add state for selected server
-
+  
   
   const handleSearch = (searchTerm) => {
     console.log("Searching for:", searchTerm);

@@ -21,12 +21,12 @@ const WhatsTrending = () => {
 
   const requestBody = {
     keywords: [searchTerm],
-    country: selectedCountry,
+    country: "US",
     currency: "USD",
   };
 
   try {
-    const response = await fetch("http://localhost:5000/api/keywords/keyword-Everywhere-Volume", {
+    const response = await fetch("https://keyword-research3.onrender.com/api/keywords/keyword-Everywhere-Volume", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
