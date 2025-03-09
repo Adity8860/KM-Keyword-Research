@@ -3,68 +3,81 @@ import BannerAds from "../Components/ui/Ads/BannerAds.jsx";
 import SearchInput from "../Components/ui/KeywordInput/SearchInput.jsx";
 import useKeywordData from "../hooks/useKeywordData.js";
 import Loader from "../Components/Loading/Loader.jsx";
-
-import Bargraph, {
-  dataWeek,
-  dataMonth,
-  dataYear,
-} from "../Components/ui/Graphs/Bargraph.jsx"; // Import data
+import Bargraph from "../Components/ui/Graphs/Bargraph.jsx";
 
 const WhatsTrending = () => {
   const [keywordData, setKeywordData] = useState(null);
-  const [graphData, setGraphData] = useState(dataWeek); // State for graph data
+  const [graphData, setGraphData] = useState([]); // State for graph data
+  const [loadingState, setLoading] = useState(false);
 
   const { data: data3, loading } = useKeywordData();
 
- const handleSearch = async (searchTerm) => {
-  console.log("Searching for:", searchTerm);
+  const handleSearch = async (searchTerm) => {
+    console.log("Searching for:", searchTerm);
+    setLoading(true);
 
-  const requestBody = {
-    keywords: [searchTerm],
-    country: "US",
-    currency: "USD",
+    const requestBody = {
+      keywords: [searchTerm],
+      country: "US",
+      currency: "USD",
+    };
+
+    try {
+      const response = await fetch("https://keyword-research3.onrender.com/api/keywords/keyword-Everywhere-Volume", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log("API Response:", result);
+
+      if (result.data && result.data.length > 0) {
+        const keywordInfo = result.data[0]; // Extract the first keyword data
+
+        const formattedData = {
+          keyword: keywordInfo.keyword,
+          competition: keywordInfo.competition,
+          cpc: keywordInfo.cpc.value, // Extract CPC value
+          currency: keywordInfo.cpc.currency, // Extract currency
+          volume: keywordInfo.vol, // Search volume
+          trend: keywordInfo.trend, // Monthly trend data
+          credits: result.credits, // Remaining credits
+        };
+
+        console.log("Formatted Data:", formattedData);
+        setKeywordData(formattedData); // Store structured data in state
+        setGraphData(formatTrendData(keywordInfo.trend)); // Set initial graph data
+      } else {
+        console.warn("No keyword data found.");
+        setKeywordData(null);
+      }
+    } catch (error) {
+      console.error("Error fetching keyword data:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  try {
-    const response = await fetch("https://keyword-research3.onrender.com/api/keywords/keyword-Everywhere-Volume", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestBody),
-    });
+  const formatTrendData = (trendData) => {
+    return trendData.map((item, index) => ({
+      name: `Week ${index + 1}`,
+      value: item.value || item, // Ensure the correct key is used
+    }));
+  };
 
-    if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
+  const handleTimeRangeChange = (timeRange) => {
+    if (keywordData && keywordData.trend) {
+      const trendData = keywordData.trend.slice(-timeRange);
+      setGraphData(formatTrendData(trendData));
     }
-
-    const result = await response.json();
-    console.log("API Response:", result);
-
-    if (result.data && result.data.length > 0) {
-      const keywordInfo = result.data[0]; // Extract the first keyword data
-
-      const formattedData = {
-        keyword: keywordInfo.keyword,
-        competition: keywordInfo.competition,
-        cpc: keywordInfo.cpc.value, // Extract CPC value
-        currency: keywordInfo.cpc.currency, // Extract currency
-        volume: keywordInfo.vol, // Search volume
-        trend: keywordInfo.trend, // Monthly trend data
-        credits: result.credits, // Remaining credits
-      };
-
-      console.log("Formatted Data:", formattedData);
-      setKeywordData(formattedData); // Store structured data in state
-    } else {
-      console.warn("No keyword data found.");
-      setKeywordData(null);
-    }
-  } catch (error) {
-    console.error("Error fetching keyword data:", error);
-  }
-};
-
+  };
 
   return (
     <div className="w-full bg-white p-5 rounded-lg">
@@ -76,9 +89,9 @@ const WhatsTrending = () => {
           <SearchInput onSearch={handleSearch} />
         </div>
         <div>
-          {loading ? (
+          {loadingState ? (
             <div className="flex justify-center">
-          <Loader />
+              <Loader />
             </div>
           ) : (
             keywordData && (
@@ -101,22 +114,22 @@ const WhatsTrending = () => {
                     </div>
                     <div className="bg-[#12153d] rounded-lg p-8 flex flex-col justify-center items-center space-y-2 mt-13.5">
                       <button
-                        onClick={() => setGraphData(dataWeek)}
+                        onClick={() => handleTimeRangeChange(8)}
                         className="p-2 font-bold text-md bg-white rounded-full pr-15 pl-15 hover:bg-[#E5590F] hover:text-white"
                       >
-                        last 8 Month
+                        Last 8 Weeks
                       </button>
                       <button
-                        onClick={() => setGraphData(dataMonth)}
+                        onClick={() => handleTimeRangeChange(10)}
                         className="p-2 font-bold text-md bg-white rounded-full pr-15 pl-15 hover:bg-[#E5590F] hover:text-white"
                       >
-                        last 10 Month
+                        Last 10 Weeks
                       </button>
                       <button
-                        onClick={() => setGraphData(dataYear)}
+                        onClick={() => handleTimeRangeChange(12)}
                         className="p-2 font-bold text-md bg-white rounded-full pr-15 pl-15 hover:bg-[#E5590F] hover:text-white"
                       >
-                        last 12 Month
+                        Last 12 Weeks
                       </button>
                     </div>
                   </div>

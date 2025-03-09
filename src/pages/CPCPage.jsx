@@ -8,8 +8,7 @@ import Loader from "../Components/Loading/Loader.jsx";
 export const CPCPage = () => {
   const [keywordData, setKeywordData] = useState(null);
   const { data: data3, loading } = useKeywordData();
-  const [ setLoading] = useState(false);
-  const [hover, setHover] = useState(false);
+  const [loadingState, setLoading] = useState(false); // Fix setLoading state initialization
   const [selectedCountry, setSelectedCountry] = useState(" "); // Add state for selected country
   
   
@@ -56,7 +55,7 @@ export const CPCPage = () => {
         </div>
         {/* <CountrySelect onCountryChange={handleCountryChange} /> Add CountrySelect component */}
         <div>
-          {loading ? (
+          {loadingState ? (
             <div className="flex justify-center">
               <Loader />
             </div>
