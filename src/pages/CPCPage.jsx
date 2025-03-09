@@ -8,22 +8,38 @@ import Loader from "../Components/Loading/Loader.jsx";
 export const CPCPage = () => {
   const [keywordData, setKeywordData] = useState(null);
   const { data: data3, loading } = useKeywordData();
+  const [ setLoading] = useState(false);
   const [hover, setHover] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(" "); // Add state for selected country
   
   
-  const handleSearch = (searchTerm) => {
+  const handleSearch = async (searchTerm) => {
     console.log("Searching for:", searchTerm);
-    const result = data3.find(
-      (item) => item.keyword.toLowerCase() === searchTerm.toLowerCase()
-    );
-    console.log("Search result:", result);
-    setKeywordData(result);
-    // if (result) {
-    //   setSpamData(getSpamRiskData(result.keyword, data3));
-    // }
-  };
+    setLoading(true);
 
+    try {
+      const response = await fetch("http://localhost:5000/api/keywords/keyword-Everywhere-Volume", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          keywords: [searchTerm],
+          country: selectedCountry,
+          currency: "USD",
+        }),
+      });
+
+      if (!response.ok) throw new Error("Failed to fetch data");
+
+      const result = await response.json();
+      console.log("Search result:", result);
+      setKeywordData(result);
+    } catch (error) {
+      console.error("Error fetching keyword data:", error);
+      setKeywordData(null);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="w-full bg-white p-5 rounded-lg">
