@@ -5,27 +5,52 @@ import SearchInput from "../Components/ui/KeywordInput/SearchInput.jsx";
 import AV from "../assets/AV.svg";
 import GoogleIcon from "../assets/googleIcon.svg";
 import Loader from "../Components/Loading/Loader.jsx";
+import CountrySelect from "../Components/ui/KeywordInput/CountrySelect.jsx"; // Import CountrySelect
 
 export const AudienceVolume = () => {
   const [keywordData, setKeywordData] = useState(null);
   const { data: data3, loading } = useKeywordData();
   const [hover, setHover] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState(" "); // Add state for selected country
-  const [selectedServer, setSelectedServer] = useState({ name: "Google", icon: GoogleIcon }); // Add state for selected server
+  const [loadingState, setLoading] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState("United States"); // Default country
+  const [selectedServer, setSelectedServer] = useState({
+    name: "Google",
+    icon: GoogleIcon,
+  }); // Add state for selected server
 
   // const handleCountryClick = (countryCode) => {
   //   setSelectedCountry({ code: countryCode, flag: countryFlags[countryCode] });
   // };
 
-  const handleSearch = (searchTerm) => {
+  const handleSearch = async (searchTerm) => {
     console.log("Searching for:", searchTerm);
-    const result = data3.find(
-      (item) => item.keyword.toLowerCase() === searchTerm.toLowerCase()
-    );
-    console.log("Search result:", result);
-    setKeywordData(result);
-    if (result) {
-      setSpamData(getSpamRiskData(result.keyword, data3));
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        "https://keyword-research3.onrender.com/api/keywords/keyword-Everywhere-Volume",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            keywords: [searchTerm],
+            country: selectedCountry,
+          }),
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to fetch data");
+
+      console.log("selectedCountry:", selectedCountry);
+
+      const result = await response.json();
+      console.log("Search result:", result);
+      setKeywordData(result);
+    } catch (error) {
+      console.error("Error fetching keyword data:", error);
+      setKeywordData(null);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -37,6 +62,13 @@ export const AudienceVolume = () => {
     setSelectedServer(server);
   };
 
+  const formatNumber = (num) => {
+    if (!num) return "0";
+    if (num >= 1000000) return (num / 1000000).toFixed(1) + "M"; // Millions
+    if (num >= 1000) return (num / 1000).toFixed(1) + "K"; // Thousands
+    return num;
+  };
+
   return (
     <div className="w-full bg-white p-5 rounded-lg">
       <div className="w-full lg:min-w-[40rem]">
@@ -44,13 +76,18 @@ export const AudienceVolume = () => {
       </div>
       <div className="w-full max-w-[895px] mx-auto  mt-2 rounded-lg">
         <div className="flex  items-center   lg:min-w-[40rem]">
-          <SearchInput onSearch={handleSearch} onCountryChange={handleCountryChange} onServerChange={handleServerChange} /> {/* Pass handleServerChange */}
+          <SearchInput
+            onSearch={handleSearch}
+            onCountryChange={handleCountryChange}
+            onServerChange={handleServerChange}
+          />{" "}
+          {/* Pass handleServerChange */}
         </div>
         {/* <CountrySelect onCountryChange={handleCountryChange} /> Add CountrySelect component */}
         <div>
           {loading ? (
             <div className="flex justify-center">
-              < Loader />
+              <Loader />
             </div>
           ) : (
             keywordData && (
@@ -67,8 +104,9 @@ export const AudienceVolume = () => {
                       </h1>
                       <div className="flex flex-col items-center justify-center mt-2 mb-4">
                         <p className="text-5xl text-[#12153d] font-bold font-sans">
-                          135k
+                          {formatNumber(keywordData?.data[0]?.vol)}
                         </p>
+
                         <div className="flex items-center justify-center mt-4">
                           {selectedCountry && (
                             <img

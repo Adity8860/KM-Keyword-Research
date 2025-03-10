@@ -67,7 +67,7 @@ const WhatsTrending = () => {
 
   const formatTrendData = (trendData) => {
     return trendData.map((item, index) => ({
-      name: `Week ${index + 1}`,
+      name: `Months ${index + 1}`,
       value: item.value || item, // Ensure the correct key is used
     }));
   };
@@ -117,19 +117,19 @@ const WhatsTrending = () => {
                         onClick={() => handleTimeRangeChange(8)}
                         className="p-2 font-bold text-md bg-white rounded-full pr-15 pl-15 hover:bg-[#E5590F] hover:text-white"
                       >
-                        Last 8 Weeks
+                        Last 8 Months
                       </button>
                       <button
                         onClick={() => handleTimeRangeChange(10)}
                         className="p-2 font-bold text-md bg-white rounded-full pr-15 pl-15 hover:bg-[#E5590F] hover:text-white"
                       >
-                        Last 10 Weeks
+                        Last 10 Months
                       </button>
                       <button
                         onClick={() => handleTimeRangeChange(12)}
                         className="p-2 font-bold text-md bg-white rounded-full pr-15 pl-15 hover:bg-[#E5590F] hover:text-white"
                       >
-                        Last 12 Weeks
+                        Last 12 Months
                       </button>
                     </div>
                   </div>

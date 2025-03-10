@@ -5,34 +5,57 @@ import SearchInput from "../Components/ui/KeywordInput/SearchInput.jsx";
 import IndicatorScale from "../Components/ui/Graphs/IndicatorScale.jsx";
 import GoogleIcon from "../assets/googleIcon.svg";
 import Loader from "../Components/Loading/Loader.jsx";
+import CountrySelect from "../Components/ui/KeywordInput/CountrySelect.jsx"; // Import CountrySelect
 
 export const AdCompetition = () => {
   const [keywordData, setKeywordData] = useState(null);
   const { data: data3, loading } = useKeywordData();
   const [hover, setHover] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState(" "); // Add state for selected country
-  const [selectedServer, setSelectedServer] = useState({
-    name: "Google",
-    icon: GoogleIcon,
-  }); // Add state for selected server
+  const [loadingState, setLoading] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState("United States"); // Default country
+  const [selectedCurrency, setSelectedCurrency] = useState("USD"); // Default currency
 
   // const handleCountryClick = (countryCode) => {
   //   setSelectedCountry({ code: countryCode, flag: countryFlags[countryCode] });
   // };
 
-  const handleSearch = (searchTerm) => {
+  const handleCountryChange = (country) => {
+    setSelectedCountry(country.name);
+  };
+
+  const handleSearch = async (searchTerm) => {
     console.log("Searching for:", searchTerm);
-    const result = data3.find(
-      (item) => item.keyword.toLowerCase() === searchTerm.toLowerCase()
-    );
-    console.log("Search result:", result);
-    setKeywordData(result);
-    if (result) {
-      setSpamData(getSpamRiskData(result.keyword, data3));
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        "https://keyword-research3.onrender.com/api/keywords/keyword-Everywhere-Volume",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            keywords: [searchTerm],
+            country: selectedCountry,
+            currency: selectedCurrency,
+          }),
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to fetch data");
+
+      console.log("selectedCountry:", selectedCountry);
+
+      const result = await response.json();
+      console.log("Search result:", result);
+      setKeywordData(result);
+    } catch (error) {
+      console.error("Error fetching keyword data:", error);
+      setKeywordData(null);
+    } finally {
+      setLoading(false);
     }
   };
 
- 
   return (
     <div className="w-full bg-white p-5 rounded-lg">
       <div className="w-full lg:min-w-[40rem]">
@@ -42,7 +65,7 @@ export const AdCompetition = () => {
         <div className="flex  items-center   lg:min-w-[40rem]">
           <SearchInput
             onSearch={handleSearch}
-            //  onCountryChange={handleCountryChange} onServerChange={handleServerChange}
+            onCountryChange={handleCountryChange}
           />{" "}
           {/* Pass handleServerChange */}
         </div>
@@ -67,7 +90,7 @@ export const AdCompetition = () => {
                       </h1>
                       <div className="flex flex-col items-center justify-center mt-2 mb-4">
                         <p className="text-5xl text-[#12153d] font-bold font-sans">
-                          0.46
+                          {keywordData?.data[0]?.competition}
                         </p>
                       </div>
                     </div>
@@ -76,7 +99,7 @@ export const AdCompetition = () => {
                         Scale: Measured on a scale of 0 to 1, with higher
                         numbers indicating more competition
                       </h3>
-                      <IndicatorScale value={0.46} />
+                      <IndicatorScale value={keywordData?.data[0]?.competition} />
                     </div>
                     <div className="w-[336px] h-[280px] bg-gray-400 mt-4 rounded-lg flex flex-col items-center justify-center ml-25">
                       <h4 className="flex flex-col justify-center items-center text-2xl font-bold">

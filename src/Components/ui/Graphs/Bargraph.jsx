@@ -55,7 +55,7 @@ const Bargraph = ({ data }) => {
           />
           <YAxis tick={false} padding={{ top: 20, bottom: 20 }} />
           <Tooltip />
-          <Legend formatter={() => 'Weekly Trend'} />
+          <Legend formatter={() => 'Monthly Trend'} />
           <Bar dataKey="value" fill="#12153D" radius={[5, 5, 5, 5]} />
         </BarChart>
       </ResponsiveContainer>

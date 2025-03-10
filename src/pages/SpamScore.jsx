@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import BannerAds from "../Components/ui/Ads/BannerAds";
 import SearchInput from "../Components/ui/KeywordInput/SearchInput";
 import useKeywordData from "../hooks/useKeywordData";
-import { renderSpamRiskCircle } from "../Components/ui/Graphs/SpamRiskCircle";
+import SpamRiskCircle from "../Components/ui/Graphs/SpamRiskCircle";
 import Loader from "../Components/Loading/Loader";
 
 const SpamScore = () => {
@@ -30,20 +30,21 @@ const SpamScore = () => {
       const data = await response.json();
       console.log("API Response:", data);
   
-      // Extracting the first digit from spam_score
-      const spamScore = data.spam_score ? parseInt(data.spam_score) : 0;
+      // Extract first digit from spam_score
+      const spamScore = data.analysisResult?.spam_score?.match(/\d/); // Extracts the first number
+      const extractedSpamScore = spamScore ? parseInt(spamScore[0]) : 0;
   
-      // Updating keywordData with the extracted spam score
+      // Updating keywordData with extracted spam score
       setKeywordData({
-        ...data,
-        spamRiskScore: spamScore, // Overriding spam_score with extracted digit
+        ...data.analysisResult,
+        spamRiskScore: extractedSpamScore, // Overriding spam_score with first digit
       });
   
     } catch (error) {
       console.error("Error fetching keyword data:", error);
     }
   };
-
+  
   return (
     <div className="w-full bg-white   p-5 rounded-lg">
       <div className="w-full lg:min-w-[40rem]">
@@ -56,7 +57,7 @@ const SpamScore = () => {
         <div>
           {loading ? (
             <div className="flex justify-center">
-             < Loader />
+              <Loader />
             </div>
           ) : (
             keywordData && (
@@ -76,21 +77,21 @@ const SpamScore = () => {
                           <p className="text-2xl font-semibold">
                             {keywordData.spamRiskScore}
                           </p>
-                        
+
                           <p className="text-md text-gray-600">
                             {keywordData.spam_description}
                           </p>
                         </div>
                         <div>
-                          {renderSpamRiskCircle(keywordData.spamRiskScore )}
-                          console.log("check",keywordData.spamRiskScore)
+                        <SpamRiskCircle percentage={keywordData.spamRiskScore} description="Spam Risk Level" />
+
+                          {/* console.log("check",keywordData.spamRiskScore) */}
                         </div>
                       </div>
                     </div>
                     <div className="p-21 bg-[#12153D] rounded-lg text-white text-center lg:text-left mt-4">
                       <h1 className="text-xl">
-                        This word appears in engines which might raise a red
-                        flag.
+                      {keywordData.spam_description}
                       </h1>
                     </div>
                   </div>
@@ -103,8 +104,9 @@ const SpamScore = () => {
                         What is it?
                       </h1>
                       <p className="text-justify">
-                        <span className="text-orange-500">Spam score</span> is used to measure a website's likelihood of
-                        getting cancelled by search engines for being spam.
+                        <span className="text-orange-500">Spam score</span> is
+                        used to measure a website's likelihood of getting
+                        cancelled by search engines for being spam.
                       </p>
                     </div>
                     <div className="bg-gray-300 h-[250px] w[300px] mt-4 rounded-md flex justify-center items-center">

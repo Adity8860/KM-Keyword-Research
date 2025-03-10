@@ -1,33 +1,46 @@
 import React, { useState } from "react";
-import useKeywordData from "../hooks/useKeywordData.js";
 import BannerAds from "../Components/ui/Ads/BannerAds.jsx";
 import SearchInput from "../Components/ui/KeywordInput/SearchInput.jsx";
 import Loader from "../Components/Loading/Loader.jsx";
- 
+import CountrySelect from "../Components/ui/KeywordInput/CountrySelect.jsx"; // Import CountrySelect
+import SelectCurrency from "../Components/ui/KeywordInput/SelectCurrency.jsx";
 
 export const CPCPage = () => {
   const [keywordData, setKeywordData] = useState(null);
-  const { data: data3, loading } = useKeywordData();
-  const [loadingState, setLoading] = useState(false); // Fix setLoading state initialization
-  const [selectedCountry, setSelectedCountry] = useState(" "); // Add state for selected country
-  
-  
+  const [loadingState, setLoading] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState("United States"); // Default country
+  const [selectedCurrency, setSelectedCurrency] = useState("USD"); // Default currency
+
+  const handleCountryChange = (country) => {
+    setSelectedCountry(country.name);
+  };
+
+  const handleCurrencyChange = (currency) => {
+    setSelectedCurrency(currency.symbol);
+  };
+
   const handleSearch = async (searchTerm) => {
     console.log("Searching for:", searchTerm);
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/keywords/keyword-Everywhere-Volume", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          keywords: [searchTerm],
-          country: selectedCountry,
-          currency: "USD",
-        }),
-      });
+      const response = await fetch(
+        "https://keyword-research3.onrender.com/api/keywords/keyword-Everywhere-Volume",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            keywords: [searchTerm],
+            country: selectedCountry,
+            currency: selectedCurrency,
+          }),
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to fetch data");
+
+      console.log("selectedCurrency:", selectedCurrency);
+      console.log("selectedCountry:", selectedCountry);
 
       const result = await response.json();
       console.log("Search result:", result);
@@ -46,13 +59,14 @@ export const CPCPage = () => {
         <BannerAds />
       </div>
       <div className="w-full max-w-[895px] mx-auto  mt-2 rounded-lg">
-        <div className="flex  items-center   lg:min-w-[40rem]">
+        <div className="flex items-center lg:min-w-[40rem]">
           <SearchInput
             onSearch={handleSearch}
-            //  onCountryChange={handleCountryChange} onServerChange={handleServerChange}
-          />{" "}
-          {/* Pass handleServerChange */}
+            onCountryChange={handleCountryChange}
+            onCurrencyChange={handleCurrencyChange}
+          />
         </div>
+
         {/* <CountrySelect onCountryChange={handleCountryChange} /> Add CountrySelect component */}
         <div>
           {loadingState ? (
@@ -74,7 +88,8 @@ export const CPCPage = () => {
                       </h1>
                       <div className="flex flex-col items-center justify-center mt-2 mb-4">
                         <p className="text-5xl text-[#12153d] font-bold font-sans">
-                          $3.46
+                          {keywordData?.data[0]?.cpc?.currency}
+                          {keywordData?.data[0]?.cpc?.value}
                         </p>
                       </div>
                     </div>
@@ -86,8 +101,9 @@ export const CPCPage = () => {
                       </h3>
                     </div>
                     <div className="w-[336px] h-[280px] bg-gray-400 mt-4 rounded-lg flex flex-col items-center justify-center ml-25">
-                      <h4 className="flex flex-col justify-center items-center text-2xl font-bold">AD</h4>
-
+                      <h4 className="flex flex-col justify-center items-center text-2xl font-bold">
+                        AD
+                      </h4>
                     </div>
                   </div>
                   <div className="mt-0 pl-2">
@@ -117,8 +133,11 @@ export const CPCPage = () => {
                 </div>
                 <div className="bg-[#12153d] text-white mt-4 p-4 rounded-md text-center lg:text-left">
                   <p className="text-md lg:text-lg">
-                  To find more information and get more insights check out {" "}
-                  <a href="#" className="text-[#E5590F]">SEO difficulty</a> to understand your local and global audience.
+                    To find more information and get more insights check out{" "}
+                    <a href="#" className="text-[#E5590F]">
+                      SEO difficulty
+                    </a>{" "}
+                    to understand your local and global audience.
                   </p>
                 </div>
               </>
