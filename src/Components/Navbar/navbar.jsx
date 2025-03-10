@@ -24,10 +24,20 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    // Logic to handle logout
+    // Remove JWT & user details from localStorage
+    localStorage.removeItem("jwt"); // Remove stored JWT
+    localStorage.removeItem("username"); // Remove any other stored details
+    
+    // Clear sessionStorage if used
+    sessionStorage.clear();
+  
+    // Update auth state
     setLoggedIn(false);
+  
+    // Redirect to login page (optional)
+    window.location.href = "/"; // OR use React Router: navigate("/login");
   };
-
+  
   // useEffect(() => {
   //   console.log("isLoginVisible:", isLoginVisible);
   // }, [isLoginVisible]);
