@@ -1,2 +1,15 @@
 @import "tailwindcss";
 @import '@fortawesome/fontawesome-free/css/all.min.css';
+
+
+@font-face {
+    font-family: wantedsans;
+    src: url("./WantedSans.otf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.text{
+    font-size: 48px;
+    font-family: "wantedsans", sans-serif;
+}
